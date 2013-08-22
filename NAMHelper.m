@@ -214,6 +214,10 @@ BOOL emailIsValid (NSString *candidate) {
     return label;
 }
 
++ (CGRect)frameForAddingViewBelowView:(UIView *)topView toView:(UIView *)superview {
+    return CGRectMake(0, topView.lowestY, superview.bounds.size.width, superview.bounds.size.height - topView.lowestY);
+}
+
 #pragma mark - Keyboard
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view {
     CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];

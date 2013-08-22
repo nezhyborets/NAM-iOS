@@ -23,8 +23,7 @@ enum {
 typedef NSInteger UIViewCustomCenterSettingType;
 
 @interface UIView (FrameManipulations)
-@property (nonatomic, readonly) CGFloat frameLowestY;
-@property (nonatomic, readonly) CGFloat boundsLowestY;
+@property (nonatomic, readonly) CGFloat lowestY;
 @property (nonatomic, readonly) CGFloat rightX;
 
 - (void)offsetXBy:(float)offset;

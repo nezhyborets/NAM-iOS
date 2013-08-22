@@ -53,6 +53,9 @@ BOOL emailIsValid (NSString *candidate);
 //Label
 + (UILabel *)adjustLabel:(UILabel *)label forString:(NSString *)string width:(CGFloat)width;
 
+//Views
++ (CGRect)frameForAddingViewBelowView:(UIView *)topView toView:(UIView *)superview;
+
 //Keyboard
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view;
 @end

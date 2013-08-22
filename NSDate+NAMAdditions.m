@@ -8,6 +8,8 @@
 
 #import "NSDate+NAMAdditions.h"
 
+NSString *const kDefaultDateFormatIntervals = @"dd.MM.yyyy";
+
 static NSDateFormatter *dateFormatter = nil;
 
 @implementation NSDate (NAMAdditions)

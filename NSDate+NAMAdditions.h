@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const kDefaultDateFormatIntervals;
+FOUNDATION_EXPORT NSString *const kDefaultUSDateFormat;
+
 @interface NSDate (NAMAdditions)
 - (NSString *)stringFromDateUsingFormat:(NSString *)dateFormat;
 - (NSDateComponents *)datesDifferenceInUnit:(NSCalendarUnit)calendarUnit withDate:(NSDate *)date;

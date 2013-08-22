@@ -73,12 +73,8 @@
     self.frame = CGRectMake(originPoint.x, originPoint.y, self.frame.size.width, self.frame.size.height);
 }
 
-- (CGFloat)frameLowestY {
+- (CGFloat)lowestY {
     return self.frame.origin.y + self.frame.size.height;
-}
-
-- (CGFloat)boundsLowestY {
-    return self.bounds.origin.y + self.bounds.size.height;
 }
 
 - (CGFloat)rightX {
