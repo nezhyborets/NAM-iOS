@@ -29,7 +29,7 @@
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [button setBackgroundImage:[UIImage imageNamed:defaultImageName] forState:UIControlStateNormal];
             [button setBackgroundImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
-            button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:10];
+            button.titleLabel.font = [UIFont fontWithName:@"Roboto-Bold" size:11];
             button.titleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.34];
             button.titleLabel.shadowOffset = CGSizeMake(0, -1);
             
@@ -69,7 +69,10 @@
 - (void)buttonAction:(id)sender {
     NSUInteger index = [self.buttonsArray indexOfObject:sender];
     
-    if ([self.delegate respondsToSelector:@selector(buttonsBar:buttonActionCalledAtIndex:)] && index != NSNotFound) {
+    if ([self.delegate respondsToSelector:@selector(buttonsBar:buttonActionCalledAtIndex:)] &&
+        index != NSNotFound &&
+        index != self.selectedIndex)
+    {
         [self.delegate buttonsBar:self buttonActionCalledAtIndex:index];
     }
 }

@@ -99,4 +99,8 @@
                             self.frame.size.height);
 }
 
+- (void)setFullAutoresizing {
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
 @end

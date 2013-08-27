@@ -37,6 +37,7 @@ typedef NSInteger UIViewCustomCenterSettingType;
 - (void)setOriginXTo:(float)originX;
 - (void)putToTheMiddleOfSuperviewWithType:(UIViewCustomCenterSettingType)type;
 - (void)setOriginTo:(CGPoint)originPoint;
+- (void)setFullAutoresizing;
 
 - (CGFloat)rightX;
 @end
