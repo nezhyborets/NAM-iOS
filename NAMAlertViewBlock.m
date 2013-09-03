@@ -30,8 +30,10 @@
         for (NSString *key = otherButtonTitles; key != nil; key = (__bridge NSString *)va_arg(_arguments, void *)) {
             [self addButtonWithTitle:key];
         }
+        
         va_end(_arguments);
     }
+    
     return self;
 }
 

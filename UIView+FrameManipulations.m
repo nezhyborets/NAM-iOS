@@ -102,5 +102,4 @@
 - (void)setFullAutoresizing {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
-
 @end
