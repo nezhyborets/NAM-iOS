@@ -10,6 +10,14 @@
 
 @implementation NAMHelper
 
+NSString *documentsPath()
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = nil;
+    documentsPath = paths[0];
+    return documentsPath;
+}
+
 #pragma mark - Dispatching
 void nam_dispatchOnQueue (NSString *queueName, void (^block)(void)) {
     dispatch_queue_t dispatchQueue = dispatch_queue_create([queueName UTF8String], NULL);
@@ -30,7 +38,11 @@ NSString* nam_trimString (NSString *inputStr) {
     return inputStr;
 }
 
-NSString* nam_checkString (id object, NAMCheckStringReturnType returnType) {
+NSString *nam_checkString (id object) {
+    return nam_stringExistsAndFilled(object);
+}
+
+NSString* nam_checkStringWithType (id object, NAMCheckStringReturnType returnType) {
     if (object && [object isKindOfClass:[NSString class]]) {
         NSString *returnValueIfFail = returnType == NAMCheckStringReturnTypeNil ? nil : @"";
         if ([nam_trimString((NSString *)object) isEqualToString:@""]) {

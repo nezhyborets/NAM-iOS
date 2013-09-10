@@ -24,4 +24,15 @@
     
     return dateString;
 }
+
+- (BOOL)containsOnlyNumbers
+{
+    NSCharacterSet *numbers = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    return ([self rangeOfCharacterFromSet:numbers].location == NSNotFound);
+}
+
+- (BOOL)isFilled {
+    NSString *trimmedString = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return ![trimmedString isEqualToString:@""];
+}
 @end

@@ -10,4 +10,6 @@
 
 @interface NSString (NAMAdditions)
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
+- (BOOL)containsOnlyNumbers;
+- (BOOL)isFilled;
 @end
