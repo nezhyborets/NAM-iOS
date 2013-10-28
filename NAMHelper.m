@@ -227,7 +227,8 @@ BOOL emailIsValid (NSString *candidate) {
 }
 
 + (CGRect)frameForAddingViewBelowView:(UIView *)topView toView:(UIView *)superview {
-    return CGRectMake(0, topView.lowestY, superview.bounds.size.width, superview.bounds.size.height - topView.lowestY);
+    CGFloat topViewLowestY = topView.frame.origin.y + topView.frame.size.height;
+    return CGRectMake(0, topViewLowestY, superview.bounds.size.width, superview.bounds.size.height - topViewLowestY);
 }
 
 #pragma mark - Keyboard
