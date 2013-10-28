@@ -86,6 +86,23 @@ BOOL nam_stringExistsAndFilledBool (id object) {
     return url;
 }
 
++ (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip {
+    NSMutableString *string = nam_stringExistsAndFilled(city) ? [NSMutableString stringWithString:city] : [NSMutableString string];
+    if (nam_stringExistsAndFilled(string) && (nam_stringExistsAndFilled(state) || nam_stringExistsAndFilled(zip))) {
+        [string appendString:@", "];
+    }
+    
+    if (nam_stringExistsAndFilled(state) && nam_stringExistsAndFilled(zip)) {
+        [string appendFormat:@"%@ %@",state,zip];
+    } else if (nam_stringExistsAndFilled(state)) {
+        [string appendString:state];
+    } else if (nam_stringExistsAndFilled(zip)) {
+        [string appendString:zip];
+    }
+    
+    return string;
+}
+
 #pragma mark - Date
 + (NSString *)formattedDateStringFromString:(NSString *)inputString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat {    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
