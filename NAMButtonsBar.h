@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSString *const kNAMButtonDefaultImageName;
+FOUNDATION_EXPORT NSString *const kNAMButtonSelectedImageName;
+FOUNDATION_EXPORT NSString *const kNAMButtonDefaultBackgroundColor;
+FOUNDATION_EXPORT NSString *const kNAMButtonSelectedBackgroundColor;
+
 @class NAMButtonsBar;
 
 @protocol NAMButtonsBarDelegate <NSObject>
@@ -21,8 +26,7 @@
 
 - (id)initWithFrame:(CGRect)frame
         titlesArray:(NSArray *)titlesArray
-   defaultImageName:(NSString *)defaultImageName
-  selectedImageName:(NSString *)selectedImageName;
+            options:(NSDictionary *)options;
 
 - (void)selectButtonAtIndex:(NSUInteger)index;
 @end

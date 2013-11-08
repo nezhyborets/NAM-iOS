@@ -7,6 +7,12 @@
 //
 
 #import "NAMButtonsBar.h"
+#import <QuartzCore/QuartzCore.h>
+
+NSString *const kNAMButtonDefaultImageName = @"kNAMButtonDefaultImageName";
+NSString *const kNAMButtonSelectedImageName = @"kNAMButtonSelectedImageName";
+NSString *const kNAMButtonDefaultBackgroundColor = @"kNAMButtonDefaultBackgroundColor";
+NSString *const kNAMButtonSelectedBackgroundColor = @"kNAMButtonSelectedBackgroundColor";
 
 @interface NAMButtonsBar()
 @property (nonatomic, strong) NSArray *buttonsArray;
@@ -16,8 +22,7 @@
 
 - (id)initWithFrame:(CGRect)frame
         titlesArray:(NSArray *)titlesArray
-   defaultImageName:(NSString *)defaultImageName
-  selectedImageName:(NSString *)selectedImageName
+            options:(NSDictionary *)options
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -27,11 +32,52 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button setTitle:title forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [button setBackgroundImage:[UIImage imageNamed:defaultImageName] forState:UIControlStateNormal];
-            [button setBackgroundImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
-            button.titleLabel.font = [UIFont fontWithName:@"Roboto-Bold" size:11];
-            button.titleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.34];
-            button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+            
+            if ([options[kNAMButtonDefaultImageName] isKindOfClass:[NSString class]]) {
+                UIImage *image = [UIImage imageNamed:options[kNAMButtonDefaultImageName]];
+                [button setBackgroundImage:image forState:UIControlStateNormal];
+            } else if ([options[kNAMButtonDefaultBackgroundColor] isKindOfClass:[UIColor class]]) {
+                UIColor *color = options[kNAMButtonDefaultBackgroundColor];
+                [button setBackgroundColor:color];
+            }
+            
+            if ([options[kNAMButtonSelectedImageName] isKindOfClass:[NSString class]]) {
+                UIImage *image = [UIImage imageNamed:options[kNAMButtonSelectedImageName]];
+                [button setBackgroundImage:image forState:UIControlStateSelected];
+            } else if ([options[kNAMButtonSelectedBackgroundColor] isKindOfClass:[UIColor class]]) {
+                UIColor *color = options[kNAMButtonSelectedBackgroundColor];
+                UIView *colorView = [[UIView alloc] initWithFrame:self.frame];
+                colorView.backgroundColor = color;
+                
+                UIGraphicsBeginImageContext(colorView.bounds.size);
+                [colorView.layer renderInContext:UIGraphicsGetCurrentContext()];
+                
+                UIImage *colorImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                [button setBackgroundImage:colorImage forState:UIControlStateSelected];
+            }
+            
+            //default text attributes used
+            if ([options[UITextAttributeTextColor] isKindOfClass:[UIColor class]]) {
+                [button setTitleColor:options[UITextAttributeTextColor] forState:UIControlStateNormal];
+            }
+            
+            if ([options[UITextAttributeFont] isKindOfClass:[UIFont class]]) {
+                button.titleLabel.font = options[UITextAttributeFont];
+            }
+            
+            if ([options[UITextAttributeTextShadowColor] isKindOfClass:[UIColor class]]) {
+                button.titleLabel.shadowColor = options[UITextAttributeTextShadowColor];
+            }
+            
+            if ([options[UITextAttributeTextShadowOffset] isKindOfClass:[NSValue class]]) {
+                NSValue *value = options[UITextAttributeTextShadowOffset];
+                button.titleLabel.shadowOffset = [value CGSizeValue];
+                button.layer.shouldRasterize = YES;
+                button.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+            }
+            
             
             [self addSubview:button];
             [buttonsArray addObject:button];
@@ -68,7 +114,10 @@
 
 - (void)buttonAction:(id)sender {
     NSUInteger index = [self.buttonsArray indexOfObject:sender];
-    
+    [self sendNotificationWithIndex:index];
+}
+
+- (void)sendNotificationWithIndex:(NSInteger)index {
     if ([self.delegate respondsToSelector:@selector(buttonsBar:buttonActionCalledAtIndex:)] &&
         index != NSNotFound &&
         index != self.selectedIndex)
