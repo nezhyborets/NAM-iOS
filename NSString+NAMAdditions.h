@@ -12,4 +12,5 @@
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
 - (BOOL)containsOnlyNumbers;
 - (BOOL)isFilled;
+- (CGFloat)compatibleHeightWithFont:(UIFont *)font width:(CGFloat)width;
 @end

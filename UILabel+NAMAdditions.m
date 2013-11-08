@@ -44,8 +44,20 @@
 - (CGSize)prepareToAdjustAndGetSize {
     self.lineBreakMode = NSLineBreakByWordWrapping;
     self.numberOfLines = 0;
-    CGSize maxSize = CGSizeMake(self.frame.size.width, 9999);
-    CGSize size = [self.text sizeWithFont:self.font constrainedToSize:maxSize];
-    return size;
+    
+    CGSize size = CGSizeZero;
+    CGSize maxSize = CGSizeMake(self.bounds.size.width, 9999);
+    
+    if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        CGRect rect = [self.text boundingRectWithSize:maxSize
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{NSFontAttributeName : self.font}
+                                         context:nil];
+        size = rect.size;
+    } else {
+        size = [self.text sizeWithFont:self.font constrainedToSize:maxSize lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    
+    return CGSizeMake(ceilf(size.width), ceilf(size.height));
 }
 @end
