@@ -17,8 +17,6 @@
 @end
 
 @interface NAMPopupView : UIView
-@property (weak, nonatomic) IBOutlet UIButton *goBtn;
-
 @property (nonatomic, assign) id <NAMPopupDelegate> delegate;
 
 + (void)showSimpleTextFieldPopupInView:(UIView *)view withText:(NSString *)text;
