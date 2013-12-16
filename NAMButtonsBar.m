@@ -99,6 +99,7 @@ NSString *const kNAMButtonSelectedTitleColor = @"kNAMButtonSelectedTitleColor";
 - (UIImageView *)backgroundImageView {
     if (!_backgroundImageView) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self insertSubview:imageView atIndex:0];
         _backgroundImageView = imageView;
     }
