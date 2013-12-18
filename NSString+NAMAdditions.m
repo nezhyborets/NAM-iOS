@@ -9,16 +9,23 @@
 #import "NSString+NAMAdditions.h"
 
 @implementation NSString (NAMAdditions)
-- (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat {
-    static NSDateFormatter *dateFormatter;
-    
+
+static NSDateFormatter *dateFormatter;
+
+- (NSDate *)dateUsingFormat:(NSString *)format {
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
     }
-    
-    dateFormatter.dateFormat = currentFormat;
+
+    dateFormatter.dateFormat = format;
     NSDate *date = [dateFormatter dateFromString:self];
-    
+
+    return date;
+}
+
+- (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat {
+    NSDate *date = [self dateUsingFormat:currentFormat];
+
     dateFormatter.dateFormat = newFormat;
     NSString *dateString = [dateFormatter stringFromDate:date];
     
