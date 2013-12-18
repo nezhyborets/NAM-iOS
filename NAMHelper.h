@@ -25,17 +25,16 @@ typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
 #define DLog( s, ... )
 #endif
 
-
-//Paths
-NSString* documentsPath();
-
 //String
 NSString* nam_trimString (NSString *inputStr);
 NSString *nam_checkString (id object);
-NSString* nam_checkStringWithType (NSString *string, NAMCheckStringReturnType returnType);
+NSString* nam_checkStringWithType (id object, NAMCheckStringReturnType returnType);
 NSString* nam_stringExistsAndFilled (id object);
 BOOL nam_stringExistsAndFilledBool (id object);
 + (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip;
+
+//Paths
+NSString* documentsPath();
 
 //Dispatching
 void nam_dispatchOnQueue (NSString *queueName, void (^block)(void));

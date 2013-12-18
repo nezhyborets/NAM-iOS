@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 Ora Interactive. All rights reserved.
 //
 
-#import "NAMHelper.h"
-
 @implementation NAMHelper
 
-NSString *documentsPath()
+#pragma mark - Misc
+NSString* documentsPath()
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = nil;

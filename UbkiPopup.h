@@ -19,5 +19,5 @@
 @interface UbkiPopup : UIView
 @property (weak, nonatomic) IBOutlet UIButton *goBtn;
 
-@property (nonatomic, assign) id <UbkiPopupDelegate> delegate;
+@property (nonatomic, weak) id <UbkiPopupDelegate> delegate;
 @end

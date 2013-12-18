@@ -17,7 +17,7 @@
 @end
 
 @interface NAMPopupView : UIView
-@property (nonatomic, assign) id <NAMPopupDelegate> delegate;
+@property (nonatomic, weak) id <NAMPopupDelegate> delegate;
 
 + (void)showSimpleTextFieldPopupInView:(UIView *)view withText:(NSString *)text;
 @end
