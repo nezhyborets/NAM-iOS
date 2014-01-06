@@ -5,7 +5,6 @@
 //  Created by Alexei on 13.09.12.
 //  Copyright (c) 2012 Ora Interactive. All rights reserved.
 //
-
 #import "NAMHelper.h"
 
 @implementation NAMHelper
