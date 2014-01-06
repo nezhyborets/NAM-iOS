@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Ora Interactive. All rights reserved.
 //
 
+#import "NAMHelper.h"
+
 @implementation NAMHelper
 
 #pragma mark - Misc
