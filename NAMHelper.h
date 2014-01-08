@@ -38,6 +38,7 @@ NSString* documentsPath();
 
 //Dispatching
 void nam_dispatchOnQueue (NSString *queueName, void (^block)(void));
+void nam_dispatchAfter(double seconds, dispatch_block_t block);
 
 //Color
 UIColor* nam_colorWithRGBA (CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
