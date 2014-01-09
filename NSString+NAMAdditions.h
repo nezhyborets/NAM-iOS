@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (NAMAdditions)
+- (NSDate *)dateUsingFormat:(NSString *)format;
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
 - (BOOL)containsOnlyNumbers;
 - (BOOL)isFilled;

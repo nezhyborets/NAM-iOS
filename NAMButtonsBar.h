@@ -12,6 +12,7 @@ FOUNDATION_EXPORT NSString *const kNAMButtonDefaultImageName;
 FOUNDATION_EXPORT NSString *const kNAMButtonSelectedImageName;
 FOUNDATION_EXPORT NSString *const kNAMButtonDefaultBackgroundColor;
 FOUNDATION_EXPORT NSString *const kNAMButtonSelectedBackgroundColor;
+FOUNDATION_EXPORT NSString *const kNAMButtonSelectedTitleColor;
 
 @class NAMButtonsBar;
 
@@ -23,6 +24,7 @@ FOUNDATION_EXPORT NSString *const kNAMButtonSelectedBackgroundColor;
 
 @property (nonatomic, weak) id <NAMButtonsBarDelegate> delegate;
 @property (nonatomic) NSUInteger selectedIndex;
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 
 - (id)initWithFrame:(CGRect)frame
         titlesArray:(NSArray *)titlesArray

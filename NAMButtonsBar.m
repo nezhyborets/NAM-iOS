@@ -13,6 +13,7 @@ NSString *const kNAMButtonDefaultImageName = @"kNAMButtonDefaultImageName";
 NSString *const kNAMButtonSelectedImageName = @"kNAMButtonSelectedImageName";
 NSString *const kNAMButtonDefaultBackgroundColor = @"kNAMButtonDefaultBackgroundColor";
 NSString *const kNAMButtonSelectedBackgroundColor = @"kNAMButtonSelectedBackgroundColor";
+NSString *const kNAMButtonSelectedTitleColor = @"kNAMButtonSelectedTitleColor";
 
 @interface NAMButtonsBar()
 @property (nonatomic, strong) NSArray *buttonsArray;
@@ -62,6 +63,10 @@ NSString *const kNAMButtonSelectedBackgroundColor = @"kNAMButtonSelectedBackgrou
             if ([options[UITextAttributeTextColor] isKindOfClass:[UIColor class]]) {
                 [button setTitleColor:options[UITextAttributeTextColor] forState:UIControlStateNormal];
             }
+
+            if ([options[kNAMButtonSelectedTitleColor] isKindOfClass:[UIColor class]]) {
+                [button setTitleColor:options[kNAMButtonSelectedTitleColor] forState:UIControlStateSelected];
+            }
             
             if ([options[UITextAttributeFont] isKindOfClass:[UIFont class]]) {
                 button.titleLabel.font = options[UITextAttributeFont];
@@ -77,8 +82,7 @@ NSString *const kNAMButtonSelectedBackgroundColor = @"kNAMButtonSelectedBackgrou
                 button.layer.shouldRasterize = YES;
                 button.layer.rasterizationScale = [[UIScreen mainScreen] scale];
             }
-            
-            
+
             [self addSubview:button];
             [buttonsArray addObject:button];
         }
@@ -89,6 +93,18 @@ NSString *const kNAMButtonSelectedBackgroundColor = @"kNAMButtonSelectedBackgrou
     }
     
     return self;
+}
+
+#pragma mark - Getters
+- (UIImageView *)backgroundImageView {
+    if (!_backgroundImageView) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self insertSubview:imageView atIndex:0];
+        _backgroundImageView = imageView;
+    }
+
+    return _backgroundImageView;
 }
 
 #pragma mark - Public API
