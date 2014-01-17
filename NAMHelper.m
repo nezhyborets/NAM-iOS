@@ -148,6 +148,13 @@ BOOL emailIsValid(NSString *candidate) {
     return [candidateTest evaluateWithObject:candidate];
 }
 
++ (BOOL)validateDigits:(NSString *)candidate {
+    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]"];
+    NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
+    
+    return [candidateTest evaluateWithObject:candidate];
+}
+
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght {
 
     // 1. Upper case.

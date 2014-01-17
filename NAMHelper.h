@@ -55,6 +55,7 @@ UIColor* nam_colorWithRGBA (CGFloat red, CGFloat green, CGFloat blue, CGFloat al
 //Validation
 BOOL emailIsValid (NSString *candidate);
 + (BOOL) validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits;
++ (BOOL)validateDigits:(NSString *)candidate;
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght;
 
 //Array
