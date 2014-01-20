@@ -58,6 +58,7 @@ BOOL emailIsValid (NSString *candidate);
 + (BOOL)validateDigits:(NSString *)candidate;
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght;
 
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array;
 //Array
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array;
 + (NSArray *)alphabeticallySortedArray:(NSArray *)array ascending:(BOOL)ascending key:(NSString *)key;

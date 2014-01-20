@@ -212,6 +212,19 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Arrays
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
+    if ([object isKindOfClass:[NSObject class]]) {
+        NSMutableArray *mutableArray = [array mutableCopy];
+        if (!mutableArray) {
+            mutableArray = [[NSMutableArray alloc] init];
+        }
+
+        [mutableArray addObject:object];
+        return [mutableArray copy];
+    }
+
+    return array;
+}
 
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array {
     NSMutableArray *lettersArray = [[NSMutableArray alloc] init];
