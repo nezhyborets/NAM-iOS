@@ -14,13 +14,24 @@ static NSDateFormatter *dateFormatter = nil;
 
 @implementation NSDate (NAMAdditions)
 
-- (NSString *)stringFromDateUsingFormat:(NSString *)dateFormat {
+- (NSString *)stringUsingFormat:(NSString *)dateFormat {
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
     }
     
     [dateFormatter setDateFormat:dateFormat];
     return [dateFormatter stringFromDate:self];
+}
+
+- (NSString *)stringUsingFormat:(NSString *)dateFormat timeZoneAbbreviation:(NSString *)abbreviation {
+    static NSDateFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+    }
+    
+    formatter.dateFormat = dateFormat;
+    formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:abbreviation];
+    return [formatter stringFromDate:self];
 }
 
 - (NSDateComponents *)datesDifferenceInUnit:(NSCalendarUnit)calendarUnit withDate:(NSDate *)date {
@@ -80,6 +91,13 @@ static NSDateFormatter *dateFormatter = nil;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponenets = [calendar components:NSUIntegerMax fromDate:self];
     dateComponenets.day += numberOfDays;
+    return [calendar dateFromComponents:dateComponenets];
+}
+
+- (NSDate *)dateByAddingMinutes:(NSInteger)minutes {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponenets = [calendar components:NSUIntegerMax fromDate:self];
+    dateComponenets.minute += minutes;
     return [calendar dateFromComponents:dateComponenets];
 }
 @end
