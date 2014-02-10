@@ -100,4 +100,17 @@ static NSDateFormatter *dateFormatter = nil;
     dateComponenets.minute += minutes;
     return [calendar dateFromComponents:dateComponenets];
 }
+
+- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    NSDateComponents *timeComponents = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:self];
+
+    dateComponents.day += days;
+    dateComponents.hour = timeComponents.hour;
+    dateComponents.minute = timeComponents.minute;
+
+    return [calendar dateFromComponents:dateComponents];
+}
 @end

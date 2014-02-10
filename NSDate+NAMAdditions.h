@@ -21,5 +21,6 @@ FOUNDATION_EXPORT NSString *const kDefaultUSDateFormat;
 - (BOOL)laterThen:(NSDate *)date;
 - (NSDate *)dateByAddingDays:(NSInteger)numberOfDays;
 - (NSDate *)dateByAddingMinutes:(NSInteger)minutes;
+- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days;
 - (NSDate *)zuluDateWithTimeString:(NSString *)timeString;
 @end
