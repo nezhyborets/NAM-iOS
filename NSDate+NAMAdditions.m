@@ -94,6 +94,13 @@ static NSDateFormatter *dateFormatter = nil;
     return [calendar dateFromComponents:dateComponenets];
 }
 
+- (NSDate *)dateByAddingMonths:(NSInteger)numberOfMonths {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponenets = [calendar components:NSUIntegerMax fromDate:self];
+    dateComponenets.month += numberOfMonths;
+    return [calendar dateFromComponents:dateComponenets];
+}
+
 - (NSDate *)dateByAddingMinutes:(NSInteger)minutes {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponenets = [calendar components:NSUIntegerMax fromDate:self];
