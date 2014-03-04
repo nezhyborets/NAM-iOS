@@ -34,7 +34,7 @@ BOOL nam_stringExistsAndFilledBool (id object);
 + (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip;
 
 //Paths
-NSString* documentsPath();
+NSString* documentsPath(void);
 
 //Dispatching
 void nam_dispatchOnQueue (NSString *queueName, void (^block)(void));

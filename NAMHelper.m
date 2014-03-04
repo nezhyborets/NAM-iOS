@@ -11,7 +11,7 @@
 @implementation NAMHelper
 
 #pragma mark - Misc
-NSString *documentsPath() {
+NSString *documentsPath(void) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = nil;
     documentsPath = paths[0];
