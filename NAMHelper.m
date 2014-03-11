@@ -22,7 +22,6 @@ NSString *documentsPath(void) {
 void nam_dispatchOnQueue(NSString *queueName, void (^block)(void)) {
     dispatch_queue_t dispatchQueue = dispatch_queue_create([queueName UTF8String], NULL);
     dispatch_async(dispatchQueue, block);
-    dispatch_release(dispatchQueue);
 }
 
 void nam_dispatchAfter(double seconds, dispatch_block_t block) {
