@@ -108,8 +108,12 @@ static NSDateFormatter *dateFormatter = nil;
     return [calendar dateFromComponents:dateComponenets];
 }
 
-- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days {
+- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days timeZoneAbbreviation:(NSString *)timeZoneAbbreviation {
     NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    if (timeZoneAbbreviation) {
+        calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:timeZoneAbbreviation];
+    }
 
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     NSDateComponents *timeComponents = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:self];
@@ -119,5 +123,9 @@ static NSDateFormatter *dateFormatter = nil;
     dateComponents.minute = timeComponents.minute;
 
     return [calendar dateFromComponents:dateComponents];
+}
+
+- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days {
+    return [self currentTimeComponentsWithOtherComponentsOfDate:date addDays:days timeZoneAbbreviation:nil];
 }
 @end

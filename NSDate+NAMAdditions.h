@@ -22,6 +22,7 @@ FOUNDATION_EXPORT NSString *const kDefaultUSDateFormat;
 - (NSDate *)dateByAddingDays:(NSInteger)numberOfDays;
 - (NSDate *)dateByAddingMonths:(NSInteger)numberOfMonths;
 - (NSDate *)dateByAddingMinutes:(NSInteger)minutes;
+- (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days timeZoneAbbreviation:(NSString *)timeZoneAbbreviation;
 - (NSDate *)currentTimeComponentsWithOtherComponentsOfDate:(NSDate *)date addDays:(NSInteger)days;
 - (NSDate *)zuluDateWithTimeString:(NSString *)timeString;
 @end
