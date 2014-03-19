@@ -11,9 +11,9 @@
 @interface NSString (NAMAdditions)
 - (BOOL)hasLetters;
 - (BOOL)containsLettersOnly;
+- (BOOL)containsDigitsOnly;
 - (NSDate *)dateUsingFormat:(NSString *)format;
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
-- (BOOL)containsOnlyNumbers;
 - (BOOL)isFilled;
 - (CGFloat)compatibleHeightWithFont:(UIFont *)font width:(CGFloat)width;
 @end

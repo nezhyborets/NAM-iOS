@@ -22,6 +22,12 @@ static NSDateFormatter *dateFormatter;
     return lettersOnly;
 }
 
+- (BOOL)containsDigitsOnly {
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    BOOL digitsOnly = [[self stringByTrimmingCharactersInSet:characterSet] isEqualToString:@""];
+    return digitsOnly;
+}
+
 - (NSDate *)dateUsingFormat:(NSString *)format {
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
@@ -40,12 +46,6 @@ static NSDateFormatter *dateFormatter;
     NSString *dateString = [dateFormatter stringFromDate:date];
     
     return dateString;
-}
-
-- (BOOL)containsOnlyNumbers
-{
-    NSCharacterSet *numbers = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
-    return ([self rangeOfCharacterFromSet:numbers].location == NSNotFound);
 }
 
 - (BOOL)isFilled {
