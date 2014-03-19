@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (NAMAdditions)
+- (BOOL)hasLetters;
+- (BOOL)containsLettersOnly;
 - (NSDate *)dateUsingFormat:(NSString *)format;
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
 - (BOOL)containsOnlyNumbers;

@@ -12,6 +12,16 @@
 
 static NSDateFormatter *dateFormatter;
 
+- (BOOL)hasLetters {
+    NSCharacterSet *letterSet = [NSCharacterSet letterCharacterSet];
+    return [self rangeOfCharacterFromSet:letterSet].location != NSNotFound;
+}
+
+- (BOOL)containsLettersOnly {
+    BOOL lettersOnly = [[self stringByTrimmingCharactersInSet:[NSCharacterSet letterCharacterSet]] isEqualToString:@""];
+    return lettersOnly;
+}
+
 - (NSDate *)dateUsingFormat:(NSString *)format {
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
