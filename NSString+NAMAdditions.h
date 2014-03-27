@@ -12,7 +12,7 @@
 - (BOOL)hasLetters;
 - (BOOL)containsLettersOnly;
 - (BOOL)containsDigitsOnly;
-- (NSDate *)dateUsingFormat:(NSString *)format;
+- (NSDate *)dateUsingFormat:(NSString *)format timeZoneAbbreviation:(NSString *)abbr;
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
 - (BOOL)isFilled;
 - (CGFloat)compatibleHeightWithFont:(UIFont *)font width:(CGFloat)width;
