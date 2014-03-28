@@ -69,15 +69,15 @@ static NSDateFormatter *dateFormatter = nil;
 
 - (NSDate *)dateWithHours:(NSUInteger)hours minutes:(NSUInteger)minutes
             usingCalendar:(NSCalendar *)calendar {
-    
+
+    NSDateComponents *dateComponents = [calendar components:NSUIntegerMax fromDate:self];
+
+    dateComponents.hour = hours;
+    dateComponents.minute = minutes;
+
     if (!calendar) {
         calendar = [NSCalendar currentCalendar];
     }
-    
-    NSDateComponents *dateComponents = [calendar components:NSUIntegerMax fromDate:self];
-    
-    dateComponents.hour = hours;
-    dateComponents.minute = minutes;
     
     NSDate *returnDate = [calendar dateFromComponents:dateComponents];
     return returnDate;
