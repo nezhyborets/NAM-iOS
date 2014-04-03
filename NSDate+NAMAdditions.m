@@ -87,6 +87,13 @@ static NSDateFormatter *dateFormatter = nil;
     return [self compare:date] == NSOrderedDescending;
 }
 
++ (NSDate *)currentTimeWithZeroDate {
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:currentDate];
+    return [calendar dateFromComponents:components];
+}
+
 - (NSDate *)dateByAddingDays:(NSInteger)numberOfDays {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponenets = [calendar components:NSUIntegerMax fromDate:self];

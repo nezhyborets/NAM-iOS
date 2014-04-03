@@ -19,6 +19,7 @@ FOUNDATION_EXPORT NSString *const kDefaultUSDateFormat;
 - (NSDate *)dateWithHours:(NSUInteger)hours minutes:(NSUInteger)minutes
             usingCalendar:(NSCalendar *)calendar;
 - (BOOL)laterThen:(NSDate *)date;
++ (NSDate *)currentTimeWithZeroDate;
 - (NSDate *)dateByAddingDays:(NSInteger)numberOfDays;
 - (NSDate *)dateByAddingMonths:(NSInteger)numberOfMonths;
 - (NSDate *)dateByAddingMinutes:(NSInteger)minutes;
