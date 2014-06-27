@@ -142,7 +142,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 + (BOOL)validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits {
-    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%i}", numberOfDigits];
+    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%lu}", (unsigned long)numberOfDigits];
     NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
 
     return [candidateTest evaluateWithObject:candidate];
