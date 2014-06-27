@@ -12,11 +12,30 @@
 
 static NSDateFormatter *dateFormatter;
 
-- (NSDate *)dateUsingFormat:(NSString *)format {
+- (BOOL)hasLetters {
+    NSCharacterSet *letterSet = [NSCharacterSet letterCharacterSet];
+    return [self rangeOfCharacterFromSet:letterSet].location != NSNotFound;
+}
+
+- (BOOL)containsLettersOnly {
+    BOOL lettersOnly = [[self stringByTrimmingCharactersInSet:[NSCharacterSet letterCharacterSet]] isEqualToString:@""];
+    return lettersOnly;
+}
+
+- (BOOL)containsDigitsOnly {
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    BOOL digitsOnly = [[self stringByTrimmingCharactersInSet:characterSet] isEqualToString:@""];
+    return digitsOnly;
+}
+
+- (NSDate *)dateUsingFormat:(NSString *)format timeZoneAbbreviation:(NSString *)abbr {
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
     }
 
+    if (abbr) {
+        dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:abbr];
+    }
     dateFormatter.dateFormat = format;
     NSDate *date = [dateFormatter dateFromString:self];
 
@@ -24,18 +43,12 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat {
-    NSDate *date = [self dateUsingFormat:currentFormat];
+    NSDate *date = [self dateUsingFormat:currentFormat timeZoneAbbreviation:[[NSTimeZone localTimeZone] abbreviation]];
 
     dateFormatter.dateFormat = newFormat;
     NSString *dateString = [dateFormatter stringFromDate:date];
     
     return dateString;
-}
-
-- (BOOL)containsOnlyNumbers
-{
-    NSCharacterSet *numbers = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
-    return ([self rangeOfCharacterFromSet:numbers].location == NSNotFound);
 }
 
 - (BOOL)isFilled {

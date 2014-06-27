@@ -34,7 +34,7 @@ BOOL nam_stringExistsAndFilledBool (id object);
 + (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip;
 
 //Paths
-NSString* documentsPath();
+NSString* documentsPath(void);
 
 //Dispatching
 void nam_dispatchOnQueue (NSString *queueName, void (^block)(void));
@@ -55,8 +55,10 @@ UIColor* nam_colorWithRGBA (CGFloat red, CGFloat green, CGFloat blue, CGFloat al
 //Validation
 BOOL emailIsValid (NSString *candidate);
 + (BOOL) validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits;
++ (BOOL)validateDigits:(NSString *)candidate;
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght;
 
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array;
 //Array
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array;
 + (NSArray *)alphabeticallySortedArray:(NSArray *)array ascending:(BOOL)ascending key:(NSString *)key;

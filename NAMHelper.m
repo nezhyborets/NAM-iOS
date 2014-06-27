@@ -11,7 +11,7 @@
 @implementation NAMHelper
 
 #pragma mark - Misc
-NSString *documentsPath() {
+NSString *documentsPath(void) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = nil;
     documentsPath = paths[0];
@@ -22,7 +22,6 @@ NSString *documentsPath() {
 void nam_dispatchOnQueue(NSString *queueName, void (^block)(void)) {
     dispatch_queue_t dispatchQueue = dispatch_queue_create([queueName UTF8String], NULL);
     dispatch_async(dispatchQueue, block);
-    dispatch_release(dispatchQueue);
 }
 
 void nam_dispatchAfter(double seconds, dispatch_block_t block) {
@@ -148,6 +147,13 @@ BOOL emailIsValid(NSString *candidate) {
     return [candidateTest evaluateWithObject:candidate];
 }
 
++ (BOOL)validateDigits:(NSString *)candidate {
+    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]"];
+    NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
+    
+    return [candidateTest evaluateWithObject:candidate];
+}
+
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght {
 
     // 1. Upper case.
@@ -205,6 +211,19 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Arrays
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
+    if ([object isKindOfClass:[NSObject class]]) {
+        NSMutableArray *mutableArray = [array mutableCopy];
+        if (!mutableArray) {
+            mutableArray = [[NSMutableArray alloc] init];
+        }
+
+        [mutableArray addObject:object];
+        return [mutableArray copy];
+    }
+
+    return array;
+}
 
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array {
     NSMutableArray *lettersArray = [[NSMutableArray alloc] init];

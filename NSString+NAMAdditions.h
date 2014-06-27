@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (NAMAdditions)
-- (NSDate *)dateUsingFormat:(NSString *)format;
+- (BOOL)hasLetters;
+- (BOOL)containsLettersOnly;
+- (BOOL)containsDigitsOnly;
+- (NSDate *)dateUsingFormat:(NSString *)format timeZoneAbbreviation:(NSString *)abbr;
 - (NSString *)dateStringInFormat:(NSString *)newFormat currentFormat:(NSString *)currentFormat;
-- (BOOL)containsOnlyNumbers;
 - (BOOL)isFilled;
 - (CGFloat)compatibleHeightWithFont:(UIFont *)font width:(CGFloat)width;
 @end
