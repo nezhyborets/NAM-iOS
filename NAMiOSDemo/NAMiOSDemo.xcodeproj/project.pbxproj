@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AABE16C51A266A5400FAC474 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16C41A266A5400FAC474 /* main.m */; };
+		AABE16C81A266A5400FAC474 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16C71A266A5400FAC474 /* AppDelegate.m */; };
+		AABE16CB1A266A5400FAC474 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16CA1A266A5400FAC474 /* ViewController.m */; };
+		AABE16CE1A266A5400FAC474 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AABE16CC1A266A5400FAC474 /* Main.storyboard */; };
+		AABE16D01A266A5400FAC474 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AABE16CF1A266A5400FAC474 /* Images.xcassets */; };
+		AABE16D31A266A5400FAC474 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABE16D11A266A5400FAC474 /* LaunchScreen.xib */; };
+		AABE16DF1A266A5400FAC474 /* NAMiOSDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16DE1A266A5400FAC474 /* NAMiOSDemoTests.m */; };
+		AABE17111A266A9B00FAC474 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16EB1A266A9B00FAC474 /* Base64.m */; };
+		AABE17121A266A9B00FAC474 /* FacebookErrorHanler.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16ED1A266A9B00FAC474 /* FacebookErrorHanler.m */; };
+		AABE17131A266A9B00FAC474 /* FacebookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16EF1A266A9B00FAC474 /* FacebookModel.m */; };
+		AABE17141A266A9B00FAC474 /* NAMAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16F11A266A9B00FAC474 /* NAMAlertViewBlock.m */; };
+		AABE17151A266A9B00FAC474 /* NAMButtonsBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16F31A266A9B00FAC474 /* NAMButtonsBar.m */; };
+		AABE17161A266A9B00FAC474 /* NAMHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16F51A266A9B00FAC474 /* NAMHelper.m */; };
+		AABE17171A266A9B00FAC474 /* NAMPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16F71A266A9B00FAC474 /* NAMPopupView.m */; };
+		AABE17181A266A9B00FAC474 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16F91A266A9B00FAC474 /* NSData+Base64.m */; };
+		AABE17191A266A9B00FAC474 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16FB1A266A9B00FAC474 /* NSData+MD5.m */; };
+		AABE171A1A266A9B00FAC474 /* NSDate+NAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16FD1A266A9B00FAC474 /* NSDate+NAMAdditions.m */; };
+		AABE171B1A266A9B00FAC474 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE16FF1A266A9B00FAC474 /* NSString+MD5.m */; };
+		AABE171C1A266A9B00FAC474 /* NSString+NAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17011A266A9B00FAC474 /* NSString+NAMAdditions.m */; };
+		AABE171D1A266A9B00FAC474 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AABE17021A266A9B00FAC474 /* README.md */; };
+		AABE171E1A266A9B00FAC474 /* StretchableBackgroundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17041A266A9B00FAC474 /* StretchableBackgroundButton.m */; };
+		AABE171F1A266A9B00FAC474 /* StretchableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17061A266A9B00FAC474 /* StretchableImageView.m */; };
+		AABE17201A266A9B00FAC474 /* TwitterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17081A266A9B00FAC474 /* TwitterModel.m */; };
+		AABE17211A266A9B00FAC474 /* UbkiPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE170A1A266A9B00FAC474 /* UbkiPopup.m */; };
+		AABE17221A266A9B00FAC474 /* UILabel+NAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE170C1A266A9B00FAC474 /* UILabel+NAMAdditions.m */; };
+		AABE17231A266A9B00FAC474 /* UIView+ColorOfPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE170E1A266A9B00FAC474 /* UIView+ColorOfPoint.m */; };
+		AABE17241A266A9B00FAC474 /* UIView+FrameManipulations.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17101A266A9B00FAC474 /* UIView+FrameManipulations.m */; };
+		AABE17271A266B0100FAC474 /* NAMHelperOther.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE17261A266B0100FAC474 /* NAMHelperOther.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AABE16D91A266A5400FAC474 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AABE16B71A266A5400FAC474 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AABE16BE1A266A5400FAC474;
+			remoteInfo = NAMiOSDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AABE16BF1A266A5400FAC474 /* NAMiOSDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NAMiOSDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABE16C31A266A5400FAC474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AABE16C41A266A5400FAC474 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AABE16C61A266A5400FAC474 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AABE16C71A266A5400FAC474 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AABE16C91A266A5400FAC474 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AABE16CA1A266A5400FAC474 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AABE16CD1A266A5400FAC474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AABE16CF1A266A5400FAC474 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AABE16D21A266A5400FAC474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		AABE16D81A266A5400FAC474 /* NAMiOSDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NAMiOSDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABE16DD1A266A5400FAC474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AABE16DE1A266A5400FAC474 /* NAMiOSDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NAMiOSDemoTests.m; sourceTree = "<group>"; };
+		AABE16EA1A266A9B00FAC474 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		AABE16EB1A266A9B00FAC474 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		AABE16EC1A266A9B00FAC474 /* FacebookErrorHanler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookErrorHanler.h; sourceTree = "<group>"; };
+		AABE16ED1A266A9B00FAC474 /* FacebookErrorHanler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookErrorHanler.m; sourceTree = "<group>"; };
+		AABE16EE1A266A9B00FAC474 /* FacebookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookModel.h; sourceTree = "<group>"; };
+		AABE16EF1A266A9B00FAC474 /* FacebookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookModel.m; sourceTree = "<group>"; };
+		AABE16F01A266A9B00FAC474 /* NAMAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMAlertViewBlock.h; sourceTree = "<group>"; };
+		AABE16F11A266A9B00FAC474 /* NAMAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMAlertViewBlock.m; sourceTree = "<group>"; };
+		AABE16F21A266A9B00FAC474 /* NAMButtonsBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMButtonsBar.h; sourceTree = "<group>"; };
+		AABE16F31A266A9B00FAC474 /* NAMButtonsBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMButtonsBar.m; sourceTree = "<group>"; };
+		AABE16F41A266A9B00FAC474 /* NAMHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMHelper.h; sourceTree = "<group>"; };
+		AABE16F51A266A9B00FAC474 /* NAMHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMHelper.m; sourceTree = "<group>"; };
+		AABE16F61A266A9B00FAC474 /* NAMPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMPopupView.h; sourceTree = "<group>"; };
+		AABE16F71A266A9B00FAC474 /* NAMPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMPopupView.m; sourceTree = "<group>"; };
+		AABE16F81A266A9B00FAC474 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		AABE16F91A266A9B00FAC474 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		AABE16FA1A266A9B00FAC474 /* NSData+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MD5.h"; sourceTree = "<group>"; };
+		AABE16FB1A266A9B00FAC474 /* NSData+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MD5.m"; sourceTree = "<group>"; };
+		AABE16FC1A266A9B00FAC474 /* NSDate+NAMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NAMAdditions.h"; sourceTree = "<group>"; };
+		AABE16FD1A266A9B00FAC474 /* NSDate+NAMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NAMAdditions.m"; sourceTree = "<group>"; };
+		AABE16FE1A266A9B00FAC474 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		AABE16FF1A266A9B00FAC474 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		AABE17001A266A9B00FAC474 /* NSString+NAMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NAMAdditions.h"; sourceTree = "<group>"; };
+		AABE17011A266A9B00FAC474 /* NSString+NAMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NAMAdditions.m"; sourceTree = "<group>"; };
+		AABE17021A266A9B00FAC474 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AABE17031A266A9B00FAC474 /* StretchableBackgroundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableBackgroundButton.h; sourceTree = "<group>"; };
+		AABE17041A266A9B00FAC474 /* StretchableBackgroundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableBackgroundButton.m; sourceTree = "<group>"; };
+		AABE17051A266A9B00FAC474 /* StretchableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableImageView.h; sourceTree = "<group>"; };
+		AABE17061A266A9B00FAC474 /* StretchableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableImageView.m; sourceTree = "<group>"; };
+		AABE17071A266A9B00FAC474 /* TwitterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterModel.h; sourceTree = "<group>"; };
+		AABE17081A266A9B00FAC474 /* TwitterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterModel.m; sourceTree = "<group>"; };
+		AABE17091A266A9B00FAC474 /* UbkiPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UbkiPopup.h; sourceTree = "<group>"; };
+		AABE170A1A266A9B00FAC474 /* UbkiPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UbkiPopup.m; sourceTree = "<group>"; };
+		AABE170B1A266A9B00FAC474 /* UILabel+NAMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+NAMAdditions.h"; sourceTree = "<group>"; };
+		AABE170C1A266A9B00FAC474 /* UILabel+NAMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+NAMAdditions.m"; sourceTree = "<group>"; };
+		AABE170D1A266A9B00FAC474 /* UIView+ColorOfPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ColorOfPoint.h"; sourceTree = "<group>"; };
+		AABE170E1A266A9B00FAC474 /* UIView+ColorOfPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ColorOfPoint.m"; sourceTree = "<group>"; };
+		AABE170F1A266A9B00FAC474 /* UIView+FrameManipulations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameManipulations.h"; sourceTree = "<group>"; };
+		AABE17101A266A9B00FAC474 /* UIView+FrameManipulations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameManipulations.m"; sourceTree = "<group>"; };
+		AABE17251A266B0100FAC474 /* NAMHelperOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMHelperOther.h; sourceTree = "<group>"; };
+		AABE17261A266B0100FAC474 /* NAMHelperOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMHelperOther.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AABE16BC1A266A5400FAC474 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABE16D51A266A5400FAC474 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AABE16B61A266A5400FAC474 = {
+			isa = PBXGroup;
+			children = (
+				AABE16C11A266A5400FAC474 /* NAMiOSDemo */,
+				AABE16DB1A266A5400FAC474 /* NAMiOSDemoTests */,
+				AABE16C01A266A5400FAC474 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AABE16C01A266A5400FAC474 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16BF1A266A5400FAC474 /* NAMiOSDemo.app */,
+				AABE16D81A266A5400FAC474 /* NAMiOSDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AABE16C11A266A5400FAC474 /* NAMiOSDemo */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16E91A266A9B00FAC474 /* Lib */,
+				AABE16C61A266A5400FAC474 /* AppDelegate.h */,
+				AABE16C71A266A5400FAC474 /* AppDelegate.m */,
+				AABE16C91A266A5400FAC474 /* ViewController.h */,
+				AABE16CA1A266A5400FAC474 /* ViewController.m */,
+				AABE16CC1A266A5400FAC474 /* Main.storyboard */,
+				AABE16CF1A266A5400FAC474 /* Images.xcassets */,
+				AABE16D11A266A5400FAC474 /* LaunchScreen.xib */,
+				AABE16C21A266A5400FAC474 /* Supporting Files */,
+			);
+			path = NAMiOSDemo;
+			sourceTree = "<group>";
+		};
+		AABE16C21A266A5400FAC474 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16C31A266A5400FAC474 /* Info.plist */,
+				AABE16C41A266A5400FAC474 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AABE16DB1A266A5400FAC474 /* NAMiOSDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16DE1A266A5400FAC474 /* NAMiOSDemoTests.m */,
+				AABE16DC1A266A5400FAC474 /* Supporting Files */,
+			);
+			path = NAMiOSDemoTests;
+			sourceTree = "<group>";
+		};
+		AABE16DC1A266A5400FAC474 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16DD1A266A5400FAC474 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AABE16E91A266A9B00FAC474 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				AABE16EA1A266A9B00FAC474 /* Base64.h */,
+				AABE16EB1A266A9B00FAC474 /* Base64.m */,
+				AABE16EC1A266A9B00FAC474 /* FacebookErrorHanler.h */,
+				AABE16ED1A266A9B00FAC474 /* FacebookErrorHanler.m */,
+				AABE16EE1A266A9B00FAC474 /* FacebookModel.h */,
+				AABE16EF1A266A9B00FAC474 /* FacebookModel.m */,
+				AABE16F01A266A9B00FAC474 /* NAMAlertViewBlock.h */,
+				AABE16F11A266A9B00FAC474 /* NAMAlertViewBlock.m */,
+				AABE16F21A266A9B00FAC474 /* NAMButtonsBar.h */,
+				AABE16F31A266A9B00FAC474 /* NAMButtonsBar.m */,
+				AABE16F41A266A9B00FAC474 /* NAMHelper.h */,
+				AABE16F51A266A9B00FAC474 /* NAMHelper.m */,
+				AABE17251A266B0100FAC474 /* NAMHelperOther.h */,
+				AABE17261A266B0100FAC474 /* NAMHelperOther.m */,
+				AABE16F61A266A9B00FAC474 /* NAMPopupView.h */,
+				AABE16F71A266A9B00FAC474 /* NAMPopupView.m */,
+				AABE16F81A266A9B00FAC474 /* NSData+Base64.h */,
+				AABE16F91A266A9B00FAC474 /* NSData+Base64.m */,
+				AABE16FA1A266A9B00FAC474 /* NSData+MD5.h */,
+				AABE16FB1A266A9B00FAC474 /* NSData+MD5.m */,
+				AABE16FC1A266A9B00FAC474 /* NSDate+NAMAdditions.h */,
+				AABE16FD1A266A9B00FAC474 /* NSDate+NAMAdditions.m */,
+				AABE16FE1A266A9B00FAC474 /* NSString+MD5.h */,
+				AABE16FF1A266A9B00FAC474 /* NSString+MD5.m */,
+				AABE17001A266A9B00FAC474 /* NSString+NAMAdditions.h */,
+				AABE17011A266A9B00FAC474 /* NSString+NAMAdditions.m */,
+				AABE17021A266A9B00FAC474 /* README.md */,
+				AABE17031A266A9B00FAC474 /* StretchableBackgroundButton.h */,
+				AABE17041A266A9B00FAC474 /* StretchableBackgroundButton.m */,
+				AABE17051A266A9B00FAC474 /* StretchableImageView.h */,
+				AABE17061A266A9B00FAC474 /* StretchableImageView.m */,
+				AABE17071A266A9B00FAC474 /* TwitterModel.h */,
+				AABE17081A266A9B00FAC474 /* TwitterModel.m */,
+				AABE17091A266A9B00FAC474 /* UbkiPopup.h */,
+				AABE170A1A266A9B00FAC474 /* UbkiPopup.m */,
+				AABE170B1A266A9B00FAC474 /* UILabel+NAMAdditions.h */,
+				AABE170C1A266A9B00FAC474 /* UILabel+NAMAdditions.m */,
+				AABE170D1A266A9B00FAC474 /* UIView+ColorOfPoint.h */,
+				AABE170E1A266A9B00FAC474 /* UIView+ColorOfPoint.m */,
+				AABE170F1A266A9B00FAC474 /* UIView+FrameManipulations.h */,
+				AABE17101A266A9B00FAC474 /* UIView+FrameManipulations.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AABE16BE1A266A5400FAC474 /* NAMiOSDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABE16E21A266A5400FAC474 /* Build configuration list for PBXNativeTarget "NAMiOSDemo" */;
+			buildPhases = (
+				AABE16BB1A266A5400FAC474 /* Sources */,
+				AABE16BC1A266A5400FAC474 /* Frameworks */,
+				AABE16BD1A266A5400FAC474 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NAMiOSDemo;
+			productName = NAMiOSDemo;
+			productReference = AABE16BF1A266A5400FAC474 /* NAMiOSDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AABE16D71A266A5400FAC474 /* NAMiOSDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABE16E51A266A5400FAC474 /* Build configuration list for PBXNativeTarget "NAMiOSDemoTests" */;
+			buildPhases = (
+				AABE16D41A266A5400FAC474 /* Sources */,
+				AABE16D51A266A5400FAC474 /* Frameworks */,
+				AABE16D61A266A5400FAC474 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AABE16DA1A266A5400FAC474 /* PBXTargetDependency */,
+			);
+			name = NAMiOSDemoTests;
+			productName = NAMiOSDemoTests;
+			productReference = AABE16D81A266A5400FAC474 /* NAMiOSDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AABE16B71A266A5400FAC474 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Oleksii Nezhyborets";
+				TargetAttributes = {
+					AABE16BE1A266A5400FAC474 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					AABE16D71A266A5400FAC474 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = AABE16BE1A266A5400FAC474;
+					};
+				};
+			};
+			buildConfigurationList = AABE16BA1A266A5400FAC474 /* Build configuration list for PBXProject "NAMiOSDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AABE16B61A266A5400FAC474;
+			productRefGroup = AABE16C01A266A5400FAC474 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AABE16BE1A266A5400FAC474 /* NAMiOSDemo */,
+				AABE16D71A266A5400FAC474 /* NAMiOSDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AABE16BD1A266A5400FAC474 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABE16CE1A266A5400FAC474 /* Main.storyboard in Resources */,
+				AABE16D31A266A5400FAC474 /* LaunchScreen.xib in Resources */,
+				AABE16D01A266A5400FAC474 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABE16D61A266A5400FAC474 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AABE16BB1A266A5400FAC474 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABE17111A266A9B00FAC474 /* Base64.m in Sources */,
+				AABE16CB1A266A5400FAC474 /* ViewController.m in Sources */,
+				AABE171E1A266A9B00FAC474 /* StretchableBackgroundButton.m in Sources */,
+				AABE17151A266A9B00FAC474 /* NAMButtonsBar.m in Sources */,
+				AABE171F1A266A9B00FAC474 /* StretchableImageView.m in Sources */,
+				AABE17181A266A9B00FAC474 /* NSData+Base64.m in Sources */,
+				AABE17201A266A9B00FAC474 /* TwitterModel.m in Sources */,
+				AABE171A1A266A9B00FAC474 /* NSDate+NAMAdditions.m in Sources */,
+				AABE17141A266A9B00FAC474 /* NAMAlertViewBlock.m in Sources */,
+				AABE171D1A266A9B00FAC474 /* README.md in Sources */,
+				AABE17241A266A9B00FAC474 /* UIView+FrameManipulations.m in Sources */,
+				AABE17231A266A9B00FAC474 /* UIView+ColorOfPoint.m in Sources */,
+				AABE171B1A266A9B00FAC474 /* NSString+MD5.m in Sources */,
+				AABE17171A266A9B00FAC474 /* NAMPopupView.m in Sources */,
+				AABE16C81A266A5400FAC474 /* AppDelegate.m in Sources */,
+				AABE171C1A266A9B00FAC474 /* NSString+NAMAdditions.m in Sources */,
+				AABE17191A266A9B00FAC474 /* NSData+MD5.m in Sources */,
+				AABE17271A266B0100FAC474 /* NAMHelperOther.m in Sources */,
+				AABE17131A266A9B00FAC474 /* FacebookModel.m in Sources */,
+				AABE17221A266A9B00FAC474 /* UILabel+NAMAdditions.m in Sources */,
+				AABE17161A266A9B00FAC474 /* NAMHelper.m in Sources */,
+				AABE17211A266A9B00FAC474 /* UbkiPopup.m in Sources */,
+				AABE17121A266A9B00FAC474 /* FacebookErrorHanler.m in Sources */,
+				AABE16C51A266A5400FAC474 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABE16D41A266A5400FAC474 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABE16DF1A266A5400FAC474 /* NAMiOSDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AABE16DA1A266A5400FAC474 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AABE16BE1A266A5400FAC474 /* NAMiOSDemo */;
+			targetProxy = AABE16D91A266A5400FAC474 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AABE16CC1A266A5400FAC474 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AABE16CD1A266A5400FAC474 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AABE16D11A266A5400FAC474 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AABE16D21A266A5400FAC474 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AABE16E01A266A5400FAC474 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AABE16E11A266A5400FAC474 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AABE16E31A266A5400FAC474 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NAMiOSDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AABE16E41A266A5400FAC474 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NAMiOSDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		AABE16E61A266A5400FAC474 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NAMiOSDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NAMiOSDemo.app/NAMiOSDemo";
+			};
+			name = Debug;
+		};
+		AABE16E71A266A5400FAC474 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NAMiOSDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NAMiOSDemo.app/NAMiOSDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AABE16BA1A266A5400FAC474 /* Build configuration list for PBXProject "NAMiOSDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABE16E01A266A5400FAC474 /* Debug */,
+				AABE16E11A266A5400FAC474 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABE16E21A266A5400FAC474 /* Build configuration list for PBXNativeTarget "NAMiOSDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABE16E31A266A5400FAC474 /* Debug */,
+				AABE16E41A266A5400FAC474 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AABE16E51A266A5400FAC474 /* Build configuration list for PBXNativeTarget "NAMiOSDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABE16E61A266A5400FAC474 /* Debug */,
+				AABE16E71A266A5400FAC474 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AABE16B71A266A5400FAC474 /* Project object */;
+}

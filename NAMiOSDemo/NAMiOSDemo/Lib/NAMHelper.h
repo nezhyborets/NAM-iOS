@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 Ora Interactive. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "UILabel+NAMAdditions.h"
+#import <UIKit/UIKit.h>
 
 typedef enum {
     NAMCheckStringReturnTypeNil,

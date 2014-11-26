@@ -34,10 +34,10 @@
         [twitterVC setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
             switch (result) {
                 case TWTweetComposeViewControllerResultCancelled:
-                    DLog(@"Twitter Result: canceled");
+                    NSLog(@"Twitter Result: canceled");
                     break;
                 case TWTweetComposeViewControllerResultDone: {
-                    DLog(@"Twitter Result: sent");
+                    NSLog(@"Twitter Result: sent");
                     //[NotificationView showMessage:@"Tweet has been sent..." fromView: vc.view];
                 }
                     break;
