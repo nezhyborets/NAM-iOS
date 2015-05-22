@@ -23,6 +23,10 @@ class ErrorHelper: NSObject {
         return kErrorDomain
     }
     
+    class func errorStatusCodeKey() -> String {
+        return "NAMErrorStatusCodeKey"
+    }
+    
     class func notLoggedInError() -> NSError {
         return NSError(domain: kErrorDomain, code: kNotLoggedInErrorCode, userInfo: [NSLocalizedDescriptionKey : "Not logged in"])
     }

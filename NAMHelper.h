@@ -24,6 +24,9 @@ typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
 #define DLog( s, ... )
 #endif
 
+BOOL smallScreen();
+BOOL iOS8();
+
 //String
 NSString* nam_trimString (NSString *inputStr);
 NSString *nam_checkString (id object);
