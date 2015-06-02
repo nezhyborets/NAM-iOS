@@ -86,7 +86,13 @@ class ErrorHelper: NSObject {
         if statusCode == 401 {
             return ErrorHelper.notLoggedInError()
         } else if let uError = error {
-            return uError
+            if (statusCode != 0 || statusCode != NSNotFound) {
+                var userInfo: [NSObject : AnyObject] = uError.userInfo ?? [:]
+                userInfo[ErrorHelper.errorStatusCodeKey()] = statusCode
+                return NSError(domain: uError.domain, code: uError.code, userInfo: userInfo)
+            } else {
+                return uError
+            }
         } else if let errorString = json?["error"] as? String {
             if errorString == "Not logged in" {
                 println(json)
