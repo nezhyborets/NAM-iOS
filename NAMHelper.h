@@ -16,6 +16,12 @@ typedef enum {
 typedef void (^nam_voidCompletionBlock)(void);
 typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
 
+FOUNDATION_EXPORT NSString *const kUserNotAuthorisedErrorNotification;
+FOUNDATION_EXPORT NSString *const kNotificationErrorKey;
+FOUNDATION_EXPORT NSString *const kNotificationDataKey;
+FOUNDATION_EXPORT NSString *const AppName;
+FOUNDATION_EXPORT NSString *const kErrorStatusCode;
+
 @interface NAMHelper : NSObject
 
 #ifdef DEBUG
@@ -23,6 +29,12 @@ typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
 #else
 #define DLog( s, ... )
 #endif
+
+NSString *appErrorDomain();
+void errorAlert(NSString *text);
+void infoAlert(NSString *text);
+
+typedef void (^ErrorCompletion)(NSError *error);
 
 BOOL smallScreen();
 BOOL iOS8();

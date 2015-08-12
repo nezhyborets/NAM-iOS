@@ -8,6 +8,12 @@
 
 #import "NAMHelper.h"
 
+NSString *const kUserNotAuthorisedErrorNotification = @"kUserNotAuthorisedErrorNotification";
+NSString *const kNotificationErrorKey = @"kNotificationErrorKey";
+NSString *const kNotificationDataKey = @"kNotificationDataKey";
+NSString *const AppName = @"Debts";
+NSString *const kErrorStatusCode = @"kErrorStatusCode";
+
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -17,6 +23,38 @@
 @implementation NAMHelper
 
 #pragma mark - Misc
+
+NSString *appErrorDomain() {
+    return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
+}
+
+NSMutableArray *_displayedErrors;
+void errorAlert(NSString *text) {
+    if (!_displayedErrors) {
+        _displayedErrors = [[NSMutableArray alloc] init];
+    }
+
+    if (text == nil) {
+        text = @"Unknown error";
+    }
+
+    if ([_displayedErrors containsObject:text]) {
+        return;
+    }
+
+    [_displayedErrors addObject:text];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_displayedErrors removeObject:text];
+    });
+
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
+void infoAlert(NSString *text) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:AppName message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
 
 BOOL iOS8() {
     return SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0");

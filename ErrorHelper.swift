@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Onix. All rights reserved.
 //
 
+import UIKit
+
 let kDataFormatError = 1
 let kNotLoggedInErrorCode = 2
 let kNoStoredApiKeyErrorCode = 3
