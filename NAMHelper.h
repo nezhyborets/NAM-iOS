@@ -22,6 +22,14 @@ FOUNDATION_EXPORT NSString *const kNotificationDataKey;
 FOUNDATION_EXPORT NSString *const AppName;
 FOUNDATION_EXPORT NSString *const kErrorStatusCode;
 
+FOUNDATION_EXPORT NSInteger const CECodeDataFormat;
+FOUNDATION_EXPORT NSInteger const CECodeNotLoggedIn;
+FOUNDATION_EXPORT NSInteger const CECodeStoredApiKey;
+FOUNDATION_EXPORT NSInteger const CECodeEmailAlreadyTaken;
+
+FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
+FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
+
 @interface NAMHelper : NSObject
 
 #ifdef DEBUG

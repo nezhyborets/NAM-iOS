@@ -14,6 +14,14 @@ NSString *const kNotificationDataKey = @"kNotificationDataKey";
 NSString *const AppName = @"Debts";
 NSString *const kErrorStatusCode = @"kErrorStatusCode";
 
+NSInteger const CECodeDataFormat = 1;
+NSInteger const CECodeNotLoggedIn = 2;
+NSInteger const CECodeStoredApiKey = 3;
+NSInteger const CECodeEmailAlreadyTaken = 4;
+
+NSInteger const CECodeFacebookPermissions = 5;
+NSInteger const CECodeFacebookCancelled = 6;
+
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
