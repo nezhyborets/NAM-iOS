@@ -11,16 +11,18 @@
 NSString *const kUserNotAuthorisedErrorNotification = @"kUserNotAuthorisedErrorNotification";
 NSString *const kNotificationErrorKey = @"kNotificationErrorKey";
 NSString *const kNotificationDataKey = @"kNotificationDataKey";
-NSString *const AppName = @"Debts";
-NSString *const kErrorStatusCode = @"kErrorStatusCode";
+NSString *const AppName = @"Wine Picker";
+NSString *const NAMErrorStatusCode = @"kErrorStatusCode";
+NSString *const NAMErrorCustomCode = @"kErrorCustomCode";
 
 NSInteger const CECodeDataFormat = 1;
 NSInteger const CECodeNotLoggedIn = 2;
 NSInteger const CECodeStoredApiKey = 3;
 NSInteger const CECodeEmailAlreadyTaken = 4;
+NSInteger const CECodeWrongPassword = 5;
 
-NSInteger const CECodeFacebookPermissions = 5;
-NSInteger const CECodeFacebookCancelled = 6;
+NSInteger const CECodeFacebookPermissions = 6;
+NSInteger const CECodeFacebookCancelled = 7;
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -338,3 +340,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 @end
+
+NSError *unknownError() {
+    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : @"Unknown error"}];
+}
