@@ -46,7 +46,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        cell.separatorInset = UIEdgeInsetsZero;
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = NO;
         cell.indentationWidth = self.textX;

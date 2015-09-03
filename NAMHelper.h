@@ -45,6 +45,7 @@ void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *unknownError();
 
+typedef void (^ImageDownloadBlock)(UIImage *image, NSError *error);
 typedef void (^ErrorCompletion)(NSError *error);
 
 BOOL smallScreen();
