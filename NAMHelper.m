@@ -8,7 +8,7 @@
 
 #import "NAMHelper.h"
 
-NSString *const kUserNotAuthorisedErrorNotification = @"kUserNotAuthorisedErrorNotification";
+NSString *const kUserNotAuthorizedErrorNotification = @"kUserNotAuthorizedErrorNotification";
 NSString *const kNotificationErrorKey = @"kNotificationErrorKey";
 NSString *const kNotificationDataKey = @"kNotificationDataKey";
 NSString *const AppName = @"Wine Picker";
