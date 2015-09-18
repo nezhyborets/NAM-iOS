@@ -16,7 +16,7 @@ typedef enum {
 typedef void (^nam_voidCompletionBlock)(void);
 typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
 
-FOUNDATION_EXPORT NSString *const kUserNotAuthorisedErrorNotification;
+FOUNDATION_EXPORT NSString *const kUserNotAuthorizedErrorNotification;
 FOUNDATION_EXPORT NSString *const kNotificationErrorKey;
 FOUNDATION_EXPORT NSString *const kNotificationDataKey;
 FOUNDATION_EXPORT NSString *const AppName;
