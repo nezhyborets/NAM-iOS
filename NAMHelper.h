@@ -45,11 +45,15 @@ void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *unknownError();
 
+typedef void (^ArrayRequestCompletion)(NSArray *items, NSError *error);
 typedef void (^ImageDownloadBlock)(UIImage *image, NSError *error);
 typedef void (^ErrorCompletion)(NSError *error);
 
 BOOL smallScreen();
 BOOL iOS8();
+
+//UIView
+void nam_setViewEnabled(UIView *view, BOOL enabled);
 
 //String
 NSString* nam_trimString (NSString *inputStr);

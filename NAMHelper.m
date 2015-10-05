@@ -34,6 +34,11 @@ NSInteger const CECodeFacebookCancelled = 7;
 
 #pragma mark - Misc
 
+void nam_setViewEnabled(UIView *view, BOOL enabled) {
+    view.alpha = enabled ? 1 : 0.5;
+    view.userInteractionEnabled = enabled;
+};
+
 NSString *appErrorDomain() {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }

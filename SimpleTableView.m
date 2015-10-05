@@ -64,12 +64,4 @@
     return self.items.count;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (self.block) {
-        self.block(indexPath);
-    }
-}
-
 @end
