@@ -15,11 +15,13 @@ typedef enum {
 
 typedef void (^nam_voidCompletionBlock)(void);
 typedef void (^nam_integerCompletionBlock)(NSInteger intValue);
+typedef void (^ArrayRequestCompletion)(NSArray *items, NSError *error);
+typedef void (^ImageDownloadBlock)(UIImage *image, NSError *error);
+typedef void (^ErrorCompletion)(NSError *error);
 
 FOUNDATION_EXPORT NSString *const kUserNotAuthorizedErrorNotification;
 FOUNDATION_EXPORT NSString *const kNotificationErrorKey;
 FOUNDATION_EXPORT NSString *const kNotificationDataKey;
-FOUNDATION_EXPORT NSString *const AppName;
 FOUNDATION_EXPORT NSString *const NAMErrorStatusCode;
 FOUNDATION_EXPORT NSString *const NAMErrorCustomCode;
 
@@ -44,10 +46,6 @@ NSString *appErrorDomain();
 void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *unknownError();
-
-typedef void (^ArrayRequestCompletion)(NSArray *items, NSError *error);
-typedef void (^ImageDownloadBlock)(UIImage *image, NSError *error);
-typedef void (^ErrorCompletion)(NSError *error);
 
 BOOL smallScreen();
 BOOL iOS8();

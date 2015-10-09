@@ -64,14 +64,14 @@ class ErrorHelper: NSObject {
         return NSError(domain: kErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : errorMessage])
     }
     
-    class func simpleRequestCompletionWithErrorKey(String, completionBlock: (error: NSError?) -> ()) -> BaseRequestCompletion {
+    class func simpleRequestCompletionWithErrorKey(_: String, completionBlock: (error: NSError?) -> ()) -> BaseRequestCompletion {
         return { (responseJson, requestError) -> () in
             var errorForCompletion: NSError?
             
             if let uError = requestError {
                 errorForCompletion = uError
             } else if let errorString = responseJson?["error"] as? String {
-                println("error found in json \(responseJson)")
+                print("error found in json \(responseJson)")
                 errorForCompletion = NSError(domain: "Debts", code: 0, userInfo: [NSLocalizedDescriptionKey : errorString])
             }
             
@@ -88,10 +88,10 @@ class ErrorHelper: NSObject {
             return uError
         } else if let errorString = json?["error"] as? String {
             if errorString == "not_logged_in".localized || errorString == "not_logged_in".localized  {
-                println(json)
+                print(json)
                 return ErrorHelper.notLoggedInErrorFromError(error)
             } else {
-                println(json)
+                print(json)
                 return ErrorHelper.errorWithMessage(errorString)
             }
         } else if let key = successKey {
@@ -116,10 +116,10 @@ class ErrorHelper: NSObject {
             }
         } else if let errorString = json?["error"] as? String {
             if errorString == "not_logged_in".localized {
-                println(json)
+                print(json)
                 return ErrorHelper.notLoggedInErrorFromError(error)
             } else {
-                println(json)
+                print(json)
                 return ErrorHelper.errorWithMessage(errorString)
             }
         } else if let key = successKey {
@@ -163,8 +163,8 @@ class ErrorHelper: NSObject {
     
     class func userFriendlyErrorForNetworkError(error: NSError, statusCode: NSInteger) -> NSError {
         var userInfo: [NSObject : AnyObject] = [:]
-        if let uErrorInfo = error.userInfo {
-            userInfo = uErrorInfo
+        if let _ = error.userInfo[NSLocalizedDescriptionKey] { //it is not right to check only for NSLocalizedDescriptionKey here
+            userInfo = error.userInfo
         } else {
             userInfo = [NSLocalizedDescriptionKey : "Unknown error"]
         }
