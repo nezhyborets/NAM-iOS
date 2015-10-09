@@ -345,6 +345,6 @@ BOOL emailIsValid(NSString *candidate) {
 
 @end
 
-NSError *unknownError() {
+NSError *nam_unknownError() {
     return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : @"Unknown error"}];
 }

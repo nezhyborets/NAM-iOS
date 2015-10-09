@@ -45,7 +45,7 @@ FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 NSString *appErrorDomain();
 void errorAlert(NSString *text);
 void infoAlert(NSString *text);
-NSError *unknownError();
+NSError *nam_unknownError();
 
 BOOL smallScreen();
 BOOL iOS8();
