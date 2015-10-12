@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Onix-Systems. All rights reserved.
 //
 
+typedef void (^SimpleTableViewSelectBlock)(NSIndexPath *indexPath);
 
 
 @interface SimpleTableView : UITableView
@@ -14,4 +15,6 @@
 @property (nonatomic) CGFloat textX;
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic) BOOL shouldFitToContentSize;
+@property (nonatomic, copy) SimpleTableViewSelectBlock block;
+
 @end
