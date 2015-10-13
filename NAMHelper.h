@@ -34,6 +34,8 @@ FOUNDATION_EXPORT NSInteger const CECodeWrongPassword;
 FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
 FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 
+FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
+
 @interface NAMHelper : NSObject
 
 #ifdef DEBUG
