@@ -35,6 +35,15 @@ NSInteger const CECodeChangeIsNotMade = 8;
 
 #pragma mark - Misc
 
+NSDictionary *nam_userInfoWithError(NSError *error) {
+    NSDictionary *dict = nil;
+    if (error) {
+        dict = @{kNotificationErrorKey : error};
+    }
+    
+    return dict;
+};
+
 void nam_setViewEnabled(UIView *view, BOOL enabled) {
     view.alpha = enabled ? 1 : 0.5;
     view.userInteractionEnabled = enabled;

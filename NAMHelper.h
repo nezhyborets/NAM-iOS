@@ -48,6 +48,7 @@ NSString *appErrorDomain();
 void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *nam_unknownError();
+NSDictionary *nam_userInfoWithError(NSError *error);
 
 BOOL smallScreen();
 BOOL iOS8();
