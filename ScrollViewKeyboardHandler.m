@@ -10,26 +10,35 @@
 
 @interface ScrollViewKeyboardHandler()
 @property (nonatomic, weak) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, weak) UIView *viewToDim;
+@property (nonatomic, weak) UIView *dimView;
 @end
 
 @implementation ScrollViewKeyboardHandler
 
 - (void)dealloc {
+    [self removeGesture];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setScrollView:(UIScrollView *)scrollView {
-    if (_scrollView != scrollView) {
-        if (self.tapGestureRecognizer && [_scrollView.gestureRecognizers containsObject:self.tapGestureRecognizer]) {
-            [_scrollView removeGestureRecognizer:self.tapGestureRecognizer];
-            self.tapGestureRecognizer = nil;
-        }
-        
-        _scrollView = scrollView;
-        
-        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-        recognizer.cancelsTouchesInView = NO;
-        [_scrollView addGestureRecognizer:recognizer];
+- (void)setViewForDismissTap:(UIView *)viewForDismissTap {
+    if (_viewForDismissTap != viewForDismissTap) {
+        [self removeGesture];
+        _viewForDismissTap = viewForDismissTap;
+        [self addGesture];
+    }
+}
+
+- (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
+    self.viewToDim = view;
+    [textField addTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)textFieldTextChanged:(UITextField *)textField {
+    if (textField.text.length) {
+        [self removeDim];
+    } else {
+        [self addDim];
     }
 }
 
@@ -47,8 +56,51 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)addGesture {
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    recognizer.cancelsTouchesInView = NO;
+    [_viewForDismissTap addGestureRecognizer:recognizer];
+}
+
+- (void)removeGesture {
+    if (self.tapGestureRecognizer && [_viewForDismissTap.gestureRecognizers containsObject:self.tapGestureRecognizer]) {
+        [_viewForDismissTap removeGestureRecognizer:self.tapGestureRecognizer];
+        self.tapGestureRecognizer = nil;
+    }
+}
+
+- (void)addDim {
+    if (!self.dimView && self.viewToDim) {
+        UIView *dimView = [[UIView alloc] initWithFrame:CGRectZero];
+        dimView.backgroundColor = [UIColor blackColor];
+        dimView.alpha = 0;
+        self.dimView = dimView;
+        
+        [self.viewToDim.superview addSubview:dimView];
+        [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.viewToDim);
+        }];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            dimView.alpha = 0.3;
+        }];
+    }
+}
+
+- (void)removeDim {
+    if (self.dimView) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.dimView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.dimView removeFromSuperview];
+        }];
+    }
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     //get the end position keyboard frame
+    [self addDim];
+    
     NSDictionary *keyInfo = [notification userInfo];
     CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     //convert it to the same view coords as the scrollView it might be occluding
@@ -68,6 +120,8 @@
 }
 
 - (void) keyboardWillHide:  (NSNotification *) notification{
+    [self removeDim];
+    
     NSDictionary *keyInfo = [notification userInfo];
     NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
     //clear the table insets - animated to the same duration of the keyboard disappearance
