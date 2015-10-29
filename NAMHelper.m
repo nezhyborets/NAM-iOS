@@ -53,6 +53,14 @@ NSString *appErrorDomain() {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }
 
+NSString* nam_addS(NSString *string, NSInteger count) {
+    if (count > 1) {
+        string = [string stringByAppendingString:@"s"];
+    }
+    
+    return string;
+};
+
 NSMutableArray *_displayedErrors;
 void errorAlert(NSString *text) {
     if (!_displayedErrors) {

@@ -57,6 +57,7 @@ BOOL iOS8();
 void nam_setViewEnabled(UIView *view, BOOL enabled);
 
 //String
+NSString* nam_addS(NSString *string, NSInteger count);
 NSString* nam_trimString (NSString *inputStr);
 NSString *nam_checkString (id object);
 NSString* nam_checkStringWithType (id object, NAMCheckStringReturnType returnType);
