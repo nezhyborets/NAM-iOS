@@ -11,6 +11,7 @@
 @interface ScrollViewKeyboardHandler()
 @property (nonatomic, weak) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, weak) UIView *viewToDim;
+@property (nonatomic, strong) NSArray *viewsToDim;
 @property (nonatomic, weak) UIView *dimView;
 @end
 
@@ -31,6 +32,20 @@
 
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
     self.viewToDim = view;
+    self.viewsToDim = nil;
+
+    [self reloadTextFieldTarget:textField];
+}
+
+- (void)setViewsToDim:(NSArray *)views fromTextFieldEntry:(UITextField *)textField {
+    self.viewToDim = nil;
+    self.viewsToDim = views;
+
+    [self reloadTextFieldTarget:textField];
+}
+
+- (void)reloadTextFieldTarget:(UITextField *)textField {
+    [textField removeTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
     [textField addTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
@@ -70,16 +85,32 @@
 }
 
 - (void)addDim {
-    if (!self.dimView && self.viewToDim) {
+    if (!self.dimView && (self.viewToDim || self.viewsToDim)) {
         UIView *dimView = [[UIView alloc] initWithFrame:CGRectZero];
         dimView.backgroundColor = [UIColor blackColor];
         dimView.alpha = 0;
         self.dimView = dimView;
-        
-        [self.viewToDim.superview addSubview:dimView];
-        [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.viewToDim);
-        }];
+
+        if (self.viewToDim) {
+            [self.viewToDim.superview addSubview:dimView];
+            [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.viewToDim);
+            }];
+        } else {
+            //Checking if superview is same on all views
+            UIView *top = self.viewsToDim[0];
+            UIView *right = self.viewsToDim[1];
+            UIView *bottom = self.viewsToDim[2];
+            UIView *left = self.viewsToDim[3];
+
+            [top.superview addSubview:dimView];
+            [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(top);
+                make.trailing.equalTo(right);
+                make.bottom.equalTo(bottom);
+                make.leading.equalTo(left);
+            }];
+        }
         
         [UIView animateWithDuration:0.2 animations:^{
             dimView.alpha = 0.3;

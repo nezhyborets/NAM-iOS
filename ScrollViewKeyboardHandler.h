@@ -14,6 +14,12 @@
 
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField;
 
+/* Same as setViewToDim, but for covering multiple sublings. These 2 methods are going to override each other.
+ *
+ * @param views Must be and array of 4 views: top, right, bottom, left.
+ */
+- (void)setViewsToDim:(NSArray *)views fromTextFieldEntry:(UITextField *)textField;
+
 - (void)subscribe;
 - (void)unsubscribe;
 @end
