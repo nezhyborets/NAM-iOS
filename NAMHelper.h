@@ -34,6 +34,8 @@ FOUNDATION_EXPORT NSInteger const CECodeWrongPassword;
 FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
 FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 
+FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
+
 @interface NAMHelper : NSObject
 
 #ifdef DEBUG
@@ -42,10 +44,17 @@ FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 #define DLog( s, ... )
 #endif
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 NSString *appErrorDomain();
 void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *nam_unknownError();
+NSDictionary *nam_userInfoWithError(NSError *error);
 
 BOOL smallScreen();
 BOOL iOS8();
@@ -54,6 +63,7 @@ BOOL iOS8();
 void nam_setViewEnabled(UIView *view, BOOL enabled);
 
 //String
+NSString* nam_addS(NSString *string, NSInteger count);
 NSString* nam_trimString (NSString *inputStr);
 NSString *nam_checkString (id object);
 NSString* nam_checkStringWithType (id object, NAMCheckStringReturnType returnType);

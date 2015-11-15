@@ -23,15 +23,21 @@ NSInteger const CECodeWrongPassword = 5;
 NSInteger const CECodeFacebookPermissions = 6;
 NSInteger const CECodeFacebookCancelled = 7;
 
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+NSInteger const CECodeChangeIsNotMade = 8;
+
 
 @implementation NAMHelper
 
 #pragma mark - Misc
+
+NSDictionary *nam_userInfoWithError(NSError *error) {
+    NSDictionary *dict = nil;
+    if (error) {
+        dict = @{kNotificationErrorKey : error};
+    }
+    
+    return dict;
+};
 
 void nam_setViewEnabled(UIView *view, BOOL enabled) {
     view.alpha = enabled ? 1 : 0.5;
@@ -41,6 +47,14 @@ void nam_setViewEnabled(UIView *view, BOOL enabled) {
 NSString *appErrorDomain() {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }
+
+NSString* nam_addS(NSString *string, NSInteger count) {
+    if (count > 1) {
+        string = [string stringByAppendingString:@"s"];
+    }
+    
+    return string;
+};
 
 NSMutableArray *_displayedErrors;
 void errorAlert(NSString *text) {
