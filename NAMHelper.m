@@ -25,10 +25,6 @@ NSInteger const CECodeFacebookCancelled = 7;
 
 NSInteger const CECodeChangeIsNotMade = 8;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2458af4a912a2032e5c8343581d25387c394f043
 @implementation NAMHelper
 
 #pragma mark - Misc
