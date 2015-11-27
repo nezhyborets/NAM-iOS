@@ -36,6 +36,12 @@ FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 
 FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 @interface NAMHelper : NSObject
 
 #ifdef DEBUG
@@ -97,6 +103,7 @@ BOOL emailIsValid (NSString *candidate);
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght;
 
 + (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array;
++ (NSArray *)arrayByRemovingObject:(id)object fromArray:(NSArray *)array;
 //Array
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array;
 + (NSArray *)alphabeticallySortedArray:(NSArray *)array ascending:(BOOL)ascending key:(NSString *)key;

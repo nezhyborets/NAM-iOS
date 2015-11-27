@@ -25,7 +25,10 @@ NSInteger const CECodeFacebookCancelled = 7;
 
 NSInteger const CECodeChangeIsNotMade = 8;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2458af4a912a2032e5c8343581d25387c394f043
 @implementation NAMHelper
 
 #pragma mark - Misc
@@ -35,7 +38,7 @@ NSDictionary *nam_userInfoWithError(NSError *error) {
     if (error) {
         dict = @{kNotificationErrorKey : error};
     }
-    
+
     return dict;
 };
 
@@ -48,15 +51,16 @@ NSString *appErrorDomain() {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }
 
-NSString* nam_addS(NSString *string, NSInteger count) {
+NSString *nam_addS(NSString *string, NSInteger count) {
     if (count > 1) {
         string = [string stringByAppendingString:@"s"];
     }
-    
+
     return string;
 };
 
 NSMutableArray *_displayedErrors;
+
 void errorAlert(NSString *text) {
     if (!_displayedErrors) {
         _displayedErrors = [[NSMutableArray alloc] init];
@@ -71,7 +75,7 @@ void errorAlert(NSString *text) {
     }
 
     [_displayedErrors addObject:text];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_displayedErrors removeObject:text];
     });
 
@@ -100,6 +104,7 @@ NSString *documentsPath(void) {
 }
 
 #pragma mark - Dispatching
+
 void nam_dispatchOnQueue(NSString *queueName, void (^block)(void)) {
     dispatch_queue_t dispatchQueue = dispatch_queue_create([queueName UTF8String], NULL);
     dispatch_async(dispatchQueue, block);
@@ -111,11 +116,13 @@ void nam_dispatchAfter(double seconds, dispatch_block_t block) {
 }
 
 #pragma mark - Colors
+
 UIColor *nam_colorWithRGBA(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha) {
     return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha];
 }
 
 #pragma mark - Strings
+
 NSString *nam_trimString(NSString *inputStr) {
     if ([inputStr isKindOfClass:[NSString class]]) {
         return [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -189,6 +196,7 @@ BOOL nam_stringExistsAndFilledBool(id object) {
 }
 
 #pragma mark - Date
+
 + (NSString *)formattedDateStringFromString:(NSString *)inputString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:oldFormat];
@@ -214,6 +222,7 @@ BOOL nam_stringExistsAndFilledBool(id object) {
 }
 
 #pragma mark - Validation
+
 BOOL emailIsValid(NSString *candidate) {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
@@ -222,7 +231,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 + (BOOL)validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits {
-    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%lu}", (unsigned long)numberOfDigits];
+    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%lu}", (unsigned long) numberOfDigits];
     NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
 
     return [candidateTest evaluateWithObject:candidate];
@@ -231,7 +240,7 @@ BOOL emailIsValid(NSString *candidate) {
 + (BOOL)validateDigits:(NSString *)candidate {
     NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]"];
     NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
-    
+
     return [candidateTest evaluateWithObject:candidate];
 }
 
@@ -261,6 +270,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - working with URL
+
 + (NSDictionary *)dictionaryByUrlParams:(NSURL *)url {
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
@@ -292,18 +302,25 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Arrays
-+ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
-    if ([object isKindOfClass:[NSObject class]]) {
-        NSMutableArray *mutableArray = [array mutableCopy];
-        if (!mutableArray) {
-            mutableArray = [[NSMutableArray alloc] init];
-        }
 
-        [mutableArray addObject:object];
-        return [mutableArray copy];
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    if (!mutableArray) {
+        mutableArray = [[NSMutableArray alloc] init];
     }
 
-    return array;
+    [mutableArray addObject:object];
+    return [mutableArray copy];
+}
+
++ (NSArray *)arrayByRemovingObject:(id)object fromArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    if (!mutableArray) {
+        mutableArray = [[NSMutableArray alloc] init];
+    }
+
+    [mutableArray removeObject:object];
+    return [mutableArray copy];
 }
 
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array {
@@ -332,6 +349,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Views
+
 + (UILabel *)adjustLabel:(UILabel *)label forString:(NSString *)string width:(CGFloat)width {
     CGSize maxSize = CGSizeMake(width, 9999);
     CGSize size = [string sizeWithFont:label.font constrainedToSize:maxSize];
@@ -349,6 +367,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Keyboard
+
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view {
     CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
