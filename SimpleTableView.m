@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Onix-Systems. All rights reserved.
 //
 
-#import <UIAlertView+Blocks/UIAlertView+Blocks.h>
 #import "SimpleTableView.h"
 
 @interface SimpleTableView() <UITableViewDataSource, UITableViewDelegate>
