@@ -24,6 +24,7 @@ NSInteger const CECodeFacebookPermissions = 6;
 NSInteger const CECodeFacebookCancelled = 7;
 
 NSInteger const CECodeChangeIsNotMade = 8;
+NSInteger const CECodeObjectNotFound = 9;
 
 @implementation NAMHelper
 

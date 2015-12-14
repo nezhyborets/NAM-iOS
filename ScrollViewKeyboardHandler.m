@@ -18,16 +18,7 @@
 @implementation ScrollViewKeyboardHandler
 
 - (void)dealloc {
-    [self removeGesture];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)setViewForDismissTap:(UIView *)viewForDismissTap {
-    if (_viewForDismissTap != viewForDismissTap) {
-        [self removeGesture];
-        _viewForDismissTap = viewForDismissTap;
-        [self addGesture];
-    }
 }
 
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
@@ -71,24 +62,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)addGesture {
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    recognizer.cancelsTouchesInView = NO;
-    [_viewForDismissTap addGestureRecognizer:recognizer];
-}
-
-- (void)removeGesture {
-    if (self.tapGestureRecognizer && [_viewForDismissTap.gestureRecognizers containsObject:self.tapGestureRecognizer]) {
-        [_viewForDismissTap removeGestureRecognizer:self.tapGestureRecognizer];
-        self.tapGestureRecognizer = nil;
-    }
-}
-
 - (void)addDim {
     if (!self.dimView && (self.viewToDim || self.viewsToDim)) {
-        UIView *dimView = [[UIView alloc] initWithFrame:CGRectZero];
+        UIControl *dimView = [[UIControl alloc] initWithFrame:CGRectZero];
         dimView.backgroundColor = [UIColor blackColor];
         dimView.alpha = 0;
+        [dimView addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.dimView = dimView;
 
         if (self.viewToDim) {

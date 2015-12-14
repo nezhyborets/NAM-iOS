@@ -35,6 +35,7 @@ FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
 FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
 
 FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
+FOUNDATION_EXPORT NSInteger const CECodeObjectNotFound;
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -55,6 +56,7 @@ void errorAlert(NSString *text);
 void infoAlert(NSString *text);
 NSError *nam_unknownError();
 NSDictionary *nam_userInfoWithError(NSError *error);
+
 
 BOOL smallScreen();
 BOOL iOS8();

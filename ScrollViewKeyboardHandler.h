@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ScrollViewKeyboardHandler : NSObject
-@property (nonatomic, weak) UIView *viewForDismissTap;
+//@property (nonatomic, weak) UIView *viewForDismissTap;
 @property (nonatomic, weak) UIScrollView *scrollView;
 
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField;
