@@ -49,7 +49,7 @@ NSString *appErrorDomain() {
 }
 
 NSString *nam_addS(NSString *string, NSInteger count) {
-    if (count > 1) {
+    if (count != 1) {
         string = [string stringByAppendingString:@"s"];
     }
 
