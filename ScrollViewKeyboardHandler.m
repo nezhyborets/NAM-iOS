@@ -21,6 +21,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.shouldAdjustScrollViewInsets = YES;
+    }
+
+    return self;
+}
+
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
     self.viewToDim = view;
     self.viewsToDim = nil;
@@ -111,35 +120,39 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     //get the end position keyboard frame
     [self addDim];
-    
-    NSDictionary *keyInfo = [notification userInfo];
-    CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    //convert it to the same view coords as the scrollView it might be occluding
-    keyboardFrame = [self.scrollView convertRect:keyboardFrame fromView:nil];
-    //calculate if the rects intersect
-    CGRect intersect = CGRectIntersection(keyboardFrame, self.scrollView.bounds);
-    if (!CGRectIsNull(intersect)) {
-        //yes they do - adjust the insets on scrollView to handle it
-        //first get the duration of the keyboard appearance animation
-        NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-        //change the table insets to match - animated to the same duration of the keyboard appearance
-        [UIView animateWithDuration:duration animations:^{
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
-            self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
-        }];
+
+    if (self.shouldAdjustScrollViewInsets) {
+        NSDictionary *keyInfo = [notification userInfo];
+        CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+        //convert it to the same view coords as the scrollView it might be occluding
+        keyboardFrame = [self.scrollView convertRect:keyboardFrame fromView:nil];
+        //calculate if the rects intersect
+        CGRect intersect = CGRectIntersection(keyboardFrame, self.scrollView.bounds);
+        if (!CGRectIsNull(intersect)) {
+            //yes they do - adjust the insets on scrollView to handle it
+            //first get the duration of the keyboard appearance animation
+            NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+            //change the table insets to match - animated to the same duration of the keyboard appearance
+            [UIView animateWithDuration:duration animations:^{
+                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+                self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+            }];
+        }
     }
 }
 
 - (void) keyboardWillHide:  (NSNotification *) notification{
     [self removeDim];
-    
-    NSDictionary *keyInfo = [notification userInfo];
-    NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-    //clear the table insets - animated to the same duration of the keyboard disappearance
-    [UIView animateWithDuration:duration animations:^{
-        self.scrollView.contentInset = UIEdgeInsetsZero;
-        self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    }];
+
+    if (self.shouldAdjustScrollViewInsets) {
+        NSDictionary *keyInfo = [notification userInfo];
+        NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+        //clear the table insets - animated to the same duration of the keyboard disappearance
+        [UIView animateWithDuration:duration animations:^{
+            self.scrollView.contentInset = UIEdgeInsetsZero;
+            self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        }];
+    }
 }
 
 @end
