@@ -64,7 +64,7 @@ void errorAlert(NSString *text) {
     }
 
     if (text == nil) {
-        text = @"Unknown error";
+        text = @"Unknown error. errorAlert() function called without parameter";
     }
 
     if ([_displayedErrors containsObject:text]) {
@@ -375,6 +375,6 @@ BOOL emailIsValid(NSString *candidate) {
 
 @end
 
-NSError *nam_unknownError() {
-    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : @"Unknown error"}];
+NSError *nam_unknownError(NSString *someExplanation) {
+    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : someExplanation}];
 }
