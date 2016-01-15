@@ -30,6 +30,10 @@ NSInteger const CECodeObjectNotFound = 9;
 
 #pragma mark - Misc
 
+NSError *nam_unknownError(NSString *someExplanation) {
+    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : someExplanation}];
+}
+
 NSDictionary *nam_userInfoWithError(NSError *error) {
     NSDictionary *dict = nil;
     if (error) {
@@ -374,7 +378,3 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 @end
-
-NSError *nam_unknownError(NSString *someExplanation) {
-    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : someExplanation}];
-}
