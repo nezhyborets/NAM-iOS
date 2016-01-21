@@ -13,6 +13,7 @@
 @property (nonatomic, weak) UIView *viewToDim;
 @property (nonatomic, strong) NSArray *viewsToDim;
 @property (nonatomic, weak) UIView *dimView;
+@property (nonatomic, weak) UITextField *textField;
 @end
 
 @implementation ScrollViewKeyboardHandler
@@ -45,6 +46,7 @@
 }
 
 - (void)reloadTextFieldTarget:(UITextField *)textField {
+    self.textField = textField;
     [textField removeTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
     [textField addTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
 }
@@ -55,6 +57,10 @@
     } else {
         [self addDim];
     }
+}
+
+- (BOOL)shouldAddDim {
+    return self.textField.text.length == 0;
 }
 
 - (void)tap:(id)sender {
@@ -72,7 +78,7 @@
 }
 
 - (void)addDim {
-    if (!self.dimView && (self.viewToDim || self.viewsToDim)) {
+    if (!self.dimView && (self.viewToDim || self.viewsToDim) && [self shouldAddDim]) {
         UIControl *dimView = [[UIControl alloc] initWithFrame:CGRectZero];
         dimView.backgroundColor = [UIColor blackColor];
         dimView.alpha = 0;
