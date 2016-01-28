@@ -377,4 +377,28 @@ BOOL emailIsValid(NSString *candidate) {
     return keyboardFrameConverted;
 }
 
++ (void)reloadTableHeaderOrFooterViewWithDynamicHeight:(UIView *)view width:(CGFloat)width {
+    NSParameterAssert(width);
+    view.frame = CGRectMake(0, 0, width, 10000);
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width];
+    constraint.active = YES;
+
+    [view setNeedsLayout];
+    [view layoutIfNeeded];
+
+    CGFloat height = [view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+    constraint.active = NO;
+
+    //update the header's frame and set it again
+    CGRect headerFrame = view.frame;
+    headerFrame.size.height = height;
+    headerFrame.size.width = width;
+    view.frame = headerFrame;
+
+    view.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
 @end

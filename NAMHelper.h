@@ -112,4 +112,6 @@ BOOL emailIsValid(NSString *candidate);
 
 //Keyboard
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view;
+
++ (void)reloadTableHeaderOrFooterViewWithDynamicHeight:(UIView *)view width:(CGFloat)width;
 @end
