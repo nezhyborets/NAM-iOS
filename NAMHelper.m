@@ -379,6 +379,8 @@ BOOL emailIsValid(NSString *candidate) {
 
 + (void)reloadTableHeaderOrFooterViewWithDynamicHeight:(UIView *)view width:(CGFloat)width {
     NSParameterAssert(width);
+    NSParameterAssert(view);
+    
     view.frame = CGRectMake(0, 0, width, 10000);
     view.translatesAutoresizingMaskIntoConstraints = NO;
 
