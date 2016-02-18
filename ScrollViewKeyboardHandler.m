@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSArray *viewsToDim;
 @property (nonatomic, weak) UIView *dimView;
 @property (nonatomic, weak) UITextField *textField;
+@property (nonatomic) BOOL subscribed;
 @end
 
 @implementation ScrollViewKeyboardHandler
@@ -68,13 +69,17 @@
 }
 
 - (void)subscribe {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    if (!self.subscribed) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+        self.subscribed = YES;
+    }
 }
 
 - (void)unsubscribe {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    self.subscribed = NO;
 }
 
 - (void)addDim {
