@@ -196,6 +196,20 @@ BOOL nam_stringExistsAndFilledBool(id object) {
     return string;
 }
 
++ (NSString *)fullNameWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    if (firstName) {
+        [array addObject:firstName];
+    }
+    
+    if (lastName) {
+        [array addObject:lastName];
+    }
+    
+    return [array count] ? [array componentsJoinedByString:@" "] : nil;
+}
+
 #pragma mark - Date
 
 + (NSString *)formattedDateStringFromString:(NSString *)inputString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat {

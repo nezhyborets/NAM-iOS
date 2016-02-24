@@ -71,6 +71,8 @@ NSString *nam_checkString(id object);
 NSString *nam_checkStringWithType(id object, NAMCheckStringReturnType returnType);
 NSString *nam_stringExistsAndFilled(id object);
 BOOL nam_stringExistsAndFilledBool(id object);
+
++ (NSString *)fullNameWithFirstName:(NSString *)firstName lastName:(NSString *)lastName;
 + (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip;
 
 //Paths
