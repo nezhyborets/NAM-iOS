@@ -84,6 +84,10 @@ void errorAlert(NSString *text) {
     [alertView show];
 }
 
++ (void)errorAlert:(NSString *)text {
+    errorAlert(text);
+}
+
 void infoAlert(NSString *text) {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:AppName message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];

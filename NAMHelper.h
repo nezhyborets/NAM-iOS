@@ -53,6 +53,7 @@ FOUNDATION_EXPORT NSInteger const CECodeObjectNotFound;
 
 NSString *appErrorDomain();
 void errorAlert(NSString *text);
++ (void)errorAlert:(NSString *)text;
 void infoAlert(NSString *text);
 NSError *nam_unknownError(NSString *someExplanation);
 NSDictionary *nam_userInfoWithError(NSError *error);
