@@ -14,18 +14,6 @@ NSString *const kNotificationDataKey = @"kNotificationDataKey";
 NSString *const NAMErrorStatusCode = @"kErrorStatusCode";
 NSString *const NAMErrorCustomCode = @"kErrorCustomCode";
 
-NSInteger const CECodeDataFormat = 1;
-NSInteger const CECodeNotLoggedIn = 2;
-NSInteger const CECodeStoredApiKey = 3;
-NSInteger const CECodeEmailAlreadyTaken = 4;
-NSInteger const CECodeWrongPassword = 5;
-
-NSInteger const CECodeFacebookPermissions = 6;
-NSInteger const CECodeFacebookCancelled = 7;
-
-NSInteger const CECodeChangeIsNotMade = 8;
-NSInteger const CECodeObjectNotFound = 9;
-
 @implementation NAMHelper
 
 #pragma mark - Misc

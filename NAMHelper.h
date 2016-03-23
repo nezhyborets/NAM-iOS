@@ -25,17 +25,18 @@ FOUNDATION_EXPORT NSString *const kNotificationDataKey;
 FOUNDATION_EXPORT NSString *const NAMErrorStatusCode;
 FOUNDATION_EXPORT NSString *const NAMErrorCustomCode;
 
-FOUNDATION_EXPORT NSInteger const CECodeDataFormat;
-FOUNDATION_EXPORT NSInteger const CECodeNotLoggedIn;
-FOUNDATION_EXPORT NSInteger const CECodeStoredApiKey;
-FOUNDATION_EXPORT NSInteger const CECodeEmailAlreadyTaken;
-FOUNDATION_EXPORT NSInteger const CECodeWrongPassword;
-
-FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
-FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
-
-FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
-FOUNDATION_EXPORT NSInteger const CECodeObjectNotFound;
+typedef NS_ENUM(NSUInteger, ShapeType) {
+    CECodeDataFormat = 1,
+    CECodeNotLoggedIn,
+    CECodeStoredApiKey,
+    CECodeEmailAlreadyTaken,
+    CECodeWrongPassword,
+    CECodeFacebookPermissions,
+    CECodeFacebookCancelled,
+    CECodeChangeIsNotMade,
+    CECodeObjectNotFound,
+    CECodeAccountSuspended
+};
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
