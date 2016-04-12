@@ -140,10 +140,12 @@ NSString *nam_checkStringWithType(id object, NAMCheckStringReturnType returnType
 
 NSString *nam_stringExistsAndFilled(id object) {
     if (object && [object isKindOfClass:[NSString class]]) {
-        if ([nam_trimString((NSString *) object) isEqualToString:@""]) {
+        NSString *trimmedString = nam_trimString((NSString *) object);
+        if ([trimmedString isEqualToString:@""]) {
             return nil;
         }
-        return object;
+        
+        return trimmedString;
     }
     return nil;
 }
