@@ -35,7 +35,8 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
     CECodeFacebookCancelled,
     CECodeChangeIsNotMade,
     CECodeObjectNotFound,
-    CECodeAccountSuspended
+    CECodeAccountSuspended,
+    CECodeUserFeedback
 };
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
