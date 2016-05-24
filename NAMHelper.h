@@ -25,24 +25,19 @@ FOUNDATION_EXPORT NSString *const kNotificationDataKey;
 FOUNDATION_EXPORT NSString *const NAMErrorStatusCode;
 FOUNDATION_EXPORT NSString *const NAMErrorCustomCode;
 
-FOUNDATION_EXPORT NSInteger const CECodeDataFormat;
-FOUNDATION_EXPORT NSInteger const CECodeNotLoggedIn;
-FOUNDATION_EXPORT NSInteger const CECodeStoredApiKey;
-FOUNDATION_EXPORT NSInteger const CECodeEmailAlreadyTaken;
-FOUNDATION_EXPORT NSInteger const CECodeWrongPassword;
-
-FOUNDATION_EXPORT NSInteger const CECodeFacebookPermissions;
-FOUNDATION_EXPORT NSInteger const CECodeFacebookCancelled;
-
-FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
-
-@interface NAMHelper : NSObject
-
-#ifdef DEBUG
-#define DLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-#else
-#define DLog( s, ... )
-#endif
+typedef NS_ENUM(NSUInteger, ShapeType) {
+    CECodeDataFormat = 1,
+    CECodeNotLoggedIn,
+    CECodeStoredApiKey,
+    CECodeEmailAlreadyTaken,
+    CECodeWrongPassword,
+    CECodeFacebookPermissions,
+    CECodeFacebookCancelled,
+    CECodeChangeIsNotMade,
+    CECodeObjectNotFound,
+    CECodeAccountSuspended,
+    CECodeUserFeedback
+};
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -50,11 +45,22 @@ FOUNDATION_EXPORT NSInteger const CECodeChangeIsNotMade;
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+@interface NAMHelper : NSObject
+
+#ifdef DEBUG
+#define DLog(s, ...) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DLog( s, ... )
+#endif
+
 NSString *appErrorDomain();
+NSString *namErrorDomain();
 void errorAlert(NSString *text);
++ (void)errorAlert:(NSString *)text;
 void infoAlert(NSString *text);
-NSError *nam_unknownError();
+NSError *nam_unknownError(NSString *someExplanation);
 NSDictionary *nam_userInfoWithError(NSError *error);
+
 
 BOOL smallScreen();
 BOOL iOS8();
@@ -63,23 +69,25 @@ BOOL iOS8();
 void nam_setViewEnabled(UIView *view, BOOL enabled);
 
 //String
-NSString* nam_addS(NSString *string, NSInteger count);
-NSString* nam_trimString (NSString *inputStr);
-NSString *nam_checkString (id object);
-NSString* nam_checkStringWithType (id object, NAMCheckStringReturnType returnType);
-NSString* nam_stringExistsAndFilled (id object);
-BOOL nam_stringExistsAndFilledBool (id object);
+NSString *nam_addS(NSString *string, NSInteger count);
+NSString *nam_trimString(NSString *inputStr);
+NSString *nam_checkString(id object);
+NSString *nam_checkStringWithType(id object, NAMCheckStringReturnType returnType);
+NSString *nam_stringExistsAndFilled(id object);
+BOOL nam_stringExistsAndFilledBool(id object);
+
++ (NSString *)fullNameWithFirstName:(NSString *)firstName lastName:(NSString *)lastName;
 + (NSString *)addressWithCity:(NSString *)city state:(NSString *)state zip:(NSString *)zip;
 
 //Paths
-NSString* documentsPath(void);
+NSString *documentsPath(void);
 
 //Dispatching
-void nam_dispatchOnQueue (NSString *queueName, void (^block)(void));
+void nam_dispatchOnQueue(NSString *queueName, void (^block)(void));
 void nam_dispatchAfter(double seconds, dispatch_block_t block);
 
 //Color
-UIColor* nam_colorWithRGBA (CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
+UIColor *nam_colorWithRGBA(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
 
 //Date
 + (NSString *)formattedDateStringFromString:(NSString *)inputString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat;
@@ -91,12 +99,13 @@ UIColor* nam_colorWithRGBA (CGFloat red, CGFloat green, CGFloat blue, CGFloat al
 + (NSURL *)urlByCheckingPrefix:(NSString *)originalUrlString baseUrl:(NSString *)baseUrl;
 
 //Validation
-BOOL emailIsValid (NSString *candidate);
-+ (BOOL) validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits;
+BOOL emailIsValid(NSString *candidate);
++ (BOOL)validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits;
 + (BOOL)validateDigits:(NSString *)candidate;
 + (BOOL)passwordIsValid:(NSString *)password minimumLenght:(NSUInteger)minimumLenght;
 
 + (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array;
++ (NSArray *)arrayByRemovingObject:(id)object fromArray:(NSArray *)array;
 //Array
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array;
 + (NSArray *)alphabeticallySortedArray:(NSArray *)array ascending:(BOOL)ascending key:(NSString *)key;
@@ -109,4 +118,6 @@ BOOL emailIsValid (NSString *candidate);
 
 //Keyboard
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view;
+
++ (void)reloadTableHeaderOrFooterViewWithDynamicHeight:(UIView *)view width:(CGFloat)width;
 @end

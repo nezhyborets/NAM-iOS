@@ -13,21 +13,23 @@
 @property (nonatomic, weak) UIView *viewToDim;
 @property (nonatomic, strong) NSArray *viewsToDim;
 @property (nonatomic, weak) UIView *dimView;
+@property (nonatomic, weak) UITextField *textField;
+@property (nonatomic) BOOL subscribed;
 @end
 
 @implementation ScrollViewKeyboardHandler
 
 - (void)dealloc {
-    [self removeGesture];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setViewForDismissTap:(UIView *)viewForDismissTap {
-    if (_viewForDismissTap != viewForDismissTap) {
-        [self removeGesture];
-        _viewForDismissTap = viewForDismissTap;
-        [self addGesture];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.shouldAdjustScrollViewInsets = YES;
     }
+
+    return self;
 }
 
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
@@ -45,6 +47,7 @@
 }
 
 - (void)reloadTextFieldTarget:(UITextField *)textField {
+    self.textField = textField;
     [textField removeTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
     [textField addTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
 }
@@ -57,38 +60,35 @@
     }
 }
 
+- (BOOL)shouldAddDim {
+    return self.textField.text.length == 0;
+}
+
 - (void)tap:(id)sender {
     [_scrollView.window endEditing:YES];
 }
 
 - (void)subscribe {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    if (!self.subscribed) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+        self.subscribed = YES;
+    }
 }
 
 - (void)unsubscribe {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)addGesture {
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    recognizer.cancelsTouchesInView = NO;
-    [_viewForDismissTap addGestureRecognizer:recognizer];
-}
-
-- (void)removeGesture {
-    if (self.tapGestureRecognizer && [_viewForDismissTap.gestureRecognizers containsObject:self.tapGestureRecognizer]) {
-        [_viewForDismissTap removeGestureRecognizer:self.tapGestureRecognizer];
-        self.tapGestureRecognizer = nil;
-    }
+    self.subscribed = NO;
 }
 
 - (void)addDim {
-    if (!self.dimView && (self.viewToDim || self.viewsToDim)) {
-        UIView *dimView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (!self.dimView && (self.viewToDim || self.viewsToDim) && [self shouldAddDim]) {
+        UIControl *dimView = [[UIControl alloc] initWithFrame:CGRectZero];
         dimView.backgroundColor = [UIColor blackColor];
         dimView.alpha = 0;
+        [dimView addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.dimView = dimView;
 
         if (self.viewToDim) {
@@ -131,35 +131,39 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     //get the end position keyboard frame
     [self addDim];
-    
-    NSDictionary *keyInfo = [notification userInfo];
-    CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    //convert it to the same view coords as the scrollView it might be occluding
-    keyboardFrame = [self.scrollView convertRect:keyboardFrame fromView:nil];
-    //calculate if the rects intersect
-    CGRect intersect = CGRectIntersection(keyboardFrame, self.scrollView.bounds);
-    if (!CGRectIsNull(intersect)) {
-        //yes they do - adjust the insets on scrollView to handle it
-        //first get the duration of the keyboard appearance animation
-        NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-        //change the table insets to match - animated to the same duration of the keyboard appearance
-        [UIView animateWithDuration:duration animations:^{
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
-            self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
-        }];
+
+    if (self.shouldAdjustScrollViewInsets) {
+        NSDictionary *keyInfo = [notification userInfo];
+        CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+        //convert it to the same view coords as the scrollView it might be occluding
+        keyboardFrame = [self.scrollView convertRect:keyboardFrame fromView:nil];
+        //calculate if the rects intersect
+        CGRect intersect = CGRectIntersection(keyboardFrame, self.scrollView.bounds);
+        if (!CGRectIsNull(intersect)) {
+            //yes they do - adjust the insets on scrollView to handle it
+            //first get the duration of the keyboard appearance animation
+            NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+            //change the table insets to match - animated to the same duration of the keyboard appearance
+            [UIView animateWithDuration:duration animations:^{
+                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+                self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+            }];
+        }
     }
 }
 
 - (void) keyboardWillHide:  (NSNotification *) notification{
     [self removeDim];
-    
-    NSDictionary *keyInfo = [notification userInfo];
-    NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-    //clear the table insets - animated to the same duration of the keyboard disappearance
-    [UIView animateWithDuration:duration animations:^{
-        self.scrollView.contentInset = UIEdgeInsetsZero;
-        self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    }];
+
+    if (self.shouldAdjustScrollViewInsets) {
+        NSDictionary *keyInfo = [notification userInfo];
+        NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+        //clear the table insets - animated to the same duration of the keyboard disappearance
+        [UIView animateWithDuration:duration animations:^{
+            self.scrollView.contentInset = UIEdgeInsetsZero;
+            self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        }];
+    }
 }
 
 @end

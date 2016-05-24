@@ -14,28 +14,20 @@ NSString *const kNotificationDataKey = @"kNotificationDataKey";
 NSString *const NAMErrorStatusCode = @"kErrorStatusCode";
 NSString *const NAMErrorCustomCode = @"kErrorCustomCode";
 
-NSInteger const CECodeDataFormat = 1;
-NSInteger const CECodeNotLoggedIn = 2;
-NSInteger const CECodeStoredApiKey = 3;
-NSInteger const CECodeEmailAlreadyTaken = 4;
-NSInteger const CECodeWrongPassword = 5;
-
-NSInteger const CECodeFacebookPermissions = 6;
-NSInteger const CECodeFacebookCancelled = 7;
-
-NSInteger const CECodeChangeIsNotMade = 8;
-
-
 @implementation NAMHelper
 
 #pragma mark - Misc
+
+NSError *nam_unknownError(NSString *someExplanation) {
+    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : someExplanation}];
+}
 
 NSDictionary *nam_userInfoWithError(NSError *error) {
     NSDictionary *dict = nil;
     if (error) {
         dict = @{kNotificationErrorKey : error};
     }
-    
+
     return dict;
 };
 
@@ -48,22 +40,27 @@ NSString *appErrorDomain() {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }
 
-NSString* nam_addS(NSString *string, NSInteger count) {
-    if (count > 1) {
+NSString *namErrorDomain() {
+    return @"NAMCustomErrorDomain";
+}
+
+NSString *nam_addS(NSString *string, NSInteger count) {
+    if (count != 1) {
         string = [string stringByAppendingString:@"s"];
     }
-    
+
     return string;
 };
 
 NSMutableArray *_displayedErrors;
+
 void errorAlert(NSString *text) {
     if (!_displayedErrors) {
         _displayedErrors = [[NSMutableArray alloc] init];
     }
 
     if (text == nil) {
-        text = @"Unknown error";
+        text = @"Unknown error. errorAlert() function called without parameter";
     }
 
     if ([_displayedErrors containsObject:text]) {
@@ -71,12 +68,16 @@ void errorAlert(NSString *text) {
     }
 
     [_displayedErrors addObject:text];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_displayedErrors removeObject:text];
     });
 
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
+}
+
++ (void)errorAlert:(NSString *)text {
+    errorAlert(text);
 }
 
 void infoAlert(NSString *text) {
@@ -100,6 +101,7 @@ NSString *documentsPath(void) {
 }
 
 #pragma mark - Dispatching
+
 void nam_dispatchOnQueue(NSString *queueName, void (^block)(void)) {
     dispatch_queue_t dispatchQueue = dispatch_queue_create([queueName UTF8String], NULL);
     dispatch_async(dispatchQueue, block);
@@ -111,11 +113,13 @@ void nam_dispatchAfter(double seconds, dispatch_block_t block) {
 }
 
 #pragma mark - Colors
+
 UIColor *nam_colorWithRGBA(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha) {
     return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha];
 }
 
 #pragma mark - Strings
+
 NSString *nam_trimString(NSString *inputStr) {
     if ([inputStr isKindOfClass:[NSString class]]) {
         return [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -140,10 +144,12 @@ NSString *nam_checkStringWithType(id object, NAMCheckStringReturnType returnType
 
 NSString *nam_stringExistsAndFilled(id object) {
     if (object && [object isKindOfClass:[NSString class]]) {
-        if ([nam_trimString((NSString *) object) isEqualToString:@""]) {
+        NSString *trimmedString = nam_trimString((NSString *) object);
+        if ([trimmedString isEqualToString:@""]) {
             return nil;
         }
-        return object;
+        
+        return trimmedString;
     }
     return nil;
 }
@@ -188,7 +194,22 @@ BOOL nam_stringExistsAndFilledBool(id object) {
     return string;
 }
 
++ (NSString *)fullNameWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    if (firstName) {
+        [array addObject:firstName];
+    }
+    
+    if (lastName) {
+        [array addObject:lastName];
+    }
+    
+    return [array count] ? [array componentsJoinedByString:@" "] : nil;
+}
+
 #pragma mark - Date
+
 + (NSString *)formattedDateStringFromString:(NSString *)inputString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:oldFormat];
@@ -214,15 +235,16 @@ BOOL nam_stringExistsAndFilledBool(id object) {
 }
 
 #pragma mark - Validation
+
 BOOL emailIsValid(NSString *candidate) {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
 
     return [emailTest evaluateWithObject:candidate];
 }
 
 + (BOOL)validateDigits:(NSString *)candidate numberOfDigits:(NSUInteger)numberOfDigits {
-    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%lu}", (unsigned long)numberOfDigits];
+    NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]{%lu}", (unsigned long) numberOfDigits];
     NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
 
     return [candidateTest evaluateWithObject:candidate];
@@ -231,7 +253,7 @@ BOOL emailIsValid(NSString *candidate) {
 + (BOOL)validateDigits:(NSString *)candidate {
     NSString *digitsRegex = [NSString stringWithFormat:@"[0-9]"];
     NSPredicate *candidateTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", digitsRegex];
-    
+
     return [candidateTest evaluateWithObject:candidate];
 }
 
@@ -261,6 +283,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - working with URL
+
 + (NSDictionary *)dictionaryByUrlParams:(NSURL *)url {
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
@@ -292,18 +315,25 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Arrays
-+ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
-    if ([object isKindOfClass:[NSObject class]]) {
-        NSMutableArray *mutableArray = [array mutableCopy];
-        if (!mutableArray) {
-            mutableArray = [[NSMutableArray alloc] init];
-        }
 
-        [mutableArray addObject:object];
-        return [mutableArray copy];
++ (NSArray *)arrayByAddingObject:(id)object toArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    if (!mutableArray) {
+        mutableArray = [[NSMutableArray alloc] init];
     }
 
-    return array;
+    [mutableArray addObject:object];
+    return [mutableArray copy];
+}
+
++ (NSArray *)arrayByRemovingObject:(id)object fromArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    if (!mutableArray) {
+        mutableArray = [[NSMutableArray alloc] init];
+    }
+
+    [mutableArray removeObject:object];
+    return [mutableArray copy];
 }
 
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array {
@@ -332,6 +362,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Views
+
 + (UILabel *)adjustLabel:(UILabel *)label forString:(NSString *)string width:(CGFloat)width {
     CGSize maxSize = CGSizeMake(width, 9999);
     CGSize size = [string sizeWithFont:label.font constrainedToSize:maxSize];
@@ -349,6 +380,7 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Keyboard
+
 + (CGRect)keyboardFrameForNotification:(NSNotification *)notification forView:(UIView *)view {
     CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -357,8 +389,30 @@ BOOL emailIsValid(NSString *candidate) {
     return keyboardFrameConverted;
 }
 
-@end
++ (void)reloadTableHeaderOrFooterViewWithDynamicHeight:(UIView *)view width:(CGFloat)width {
+    NSParameterAssert(width);
+    NSParameterAssert(view);
+    
+    view.frame = CGRectMake(0, 0, width, 10000);
+    view.translatesAutoresizingMaskIntoConstraints = NO;
 
-NSError *nam_unknownError() {
-    return [NSError errorWithDomain:appErrorDomain() code:CECodeDataFormat userInfo:@{NSLocalizedDescriptionKey : @"Unknown error"}];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:width];
+    constraint.active = YES;
+
+    [view setNeedsLayout];
+    [view layoutIfNeeded];
+
+    CGFloat height = [view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+    constraint.active = NO;
+
+    //update the header's frame and set it again
+    CGRect headerFrame = view.frame;
+    headerFrame.size.height = height;
+    headerFrame.size.width = width;
+    view.frame = headerFrame;
+
+    view.translatesAutoresizingMaskIntoConstraints = YES;
 }
+
+@end
