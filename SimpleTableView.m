@@ -24,6 +24,7 @@
         [v addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(v.mas_trailingMargin);
+            make.centerY.equalTo(v);
         }];
         self.selectionImageView = imageView;
     }
@@ -75,13 +76,14 @@
         cell.preservesSuperviewLayoutMargins = NO;
         cell.indentationWidth = self.textX;
         cell.indentationLevel = 1;
+        cell.selectionStyle = self.selectionStyle;
     }
 
     NSString *value = self.items[indexPath.row];
     cell.textLabel.text = value;
     cell.textLabel.font = self.textFont;
     cell.textLabel.textColor = self.textColor;
-    
+
     if ([value isEqualToString:self.selectedValue]) {
         cell.selectionImageView.image = self.selectionImage;
     } else {
@@ -98,12 +100,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSMutableArray *indexPathsToReload = [[NSMutableArray alloc] init];
     NSInteger previouslySelectedIndex = [self.items indexOfObject:self.selectedValue];
+    NSIndexPath *previouslySelectedIndexPath = [NSIndexPath indexPathForRow:previouslySelectedIndex inSection:0];
+    
+    if (indexPath.row == previouslySelectedIndex) {
+        [indexPathsToReload addObject:previouslySelectedIndexPath];
+    } else if (previouslySelectedIndex == NSNotFound) {
+        [indexPathsToReload addObject:indexPath];
+    } else {
+        [indexPathsToReload addObject:previouslySelectedIndexPath];
+        [indexPathsToReload addObject:indexPath];
+    }
     
     self.selectedValue = self.items[indexPath.row];
+    [tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationNone];
     
-    if (self.block) {
-        self.block(indexPath);
+    if (self.didSelectBlock) {
+        self.didSelectBlock(indexPath);
     }
 }
 
