@@ -8,6 +8,31 @@
 
 #import "SimpleTableView.h"
 
+@interface SimpleTableViewCell : UITableViewCell
+@property (nonatomic, weak) UIImageView *selectionImageView;
+@end
+
+@implementation SimpleTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if (self) {
+        UIView *v = self.contentView;
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [v addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(v.mas_trailingMargin);
+        }];
+        self.selectionImageView = imageView;
+    }
+    
+    return self;
+}
+
+@end
+
 @interface SimpleTableView() <UITableViewDataSource, UITableViewDelegate>
 @end
 
@@ -42,9 +67,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *simpleTableIdentifier = @"simpleTableIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    SimpleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[SimpleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         cell.separatorInset = UIEdgeInsetsZero;
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = NO;
@@ -52,9 +77,16 @@
         cell.indentationLevel = 1;
     }
 
-    cell.textLabel.text = self.items[indexPath.row];
+    NSString *value = self.items[indexPath.row];
+    cell.textLabel.text = value;
     cell.textLabel.font = self.textFont;
     cell.textLabel.textColor = self.textColor;
+    
+    if ([value isEqualToString:self.selectedValue]) {
+        cell.selectionImageView.image = self.selectionImage;
+    } else {
+        cell.selectionImageView.image = nil;
+    }
 
     return cell;
 }
@@ -65,6 +97,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSInteger previouslySelectedIndex = [self.items indexOfObject:self.selectedValue];
+    
+    self.selectedValue = self.items[indexPath.row];
     
     if (self.block) {
         self.block(indexPath);

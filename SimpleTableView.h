@@ -13,8 +13,11 @@ typedef void (^SimpleTableViewSelectBlock)(NSIndexPath *indexPath);
 @property (nonatomic, strong) UIFont *textFont;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic) CGFloat textX;
-@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSArray <NSString *> *items;
+@property (nonatomic, strong) NSString *selectedValue;
+@property (nonatomic, strong) UIImage *selectionImage;
 @property (nonatomic) BOOL shouldFitToContentSize;
 @property (nonatomic, copy) SimpleTableViewSelectBlock block;
 
+- (instancetype) __unavailable init;
 @end
