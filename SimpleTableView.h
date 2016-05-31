@@ -16,9 +16,12 @@ typedef void (^SimpleTableViewSelectBlock)(NSIndexPath *indexPath);
 @property (nonatomic, strong) NSArray <NSString *> *items;
 @property (nonatomic, strong) NSString *selectedValue;
 @property (nonatomic, strong) UIImage *selectionImage;
+@property (nonatomic) CGSize imageSize;
 @property (nonatomic) BOOL shouldFitToContentSize;
 @property (nonatomic) UITableViewCellSelectionStyle selectionStyle;
 @property (nonatomic, copy) SimpleTableViewSelectBlock didSelectBlock;
+@property (nonatomic) BOOL removeMargins;
 
+- (void)hideSeparatorsForEmptyCells;
 - (instancetype) __unavailable init;
 @end
