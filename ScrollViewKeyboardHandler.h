@@ -13,6 +13,7 @@
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic) BOOL shouldAdjustScrollViewInsets; //Defaults to YES
 
+- (void)bringDimViewToFront;
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField;
 
 /* Same as setViewToDim, but for covering multiple sublings. These 2 methods are going to override each other.

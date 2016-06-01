@@ -32,6 +32,10 @@
     return self;
 }
 
+- (void)bringDimViewToFront {
+    [self.dimView.superview bringSubviewToFront:self.dimView];
+}
+
 - (void)setViewToDim:(UIView *)view fromTextFieldEntry:(UITextField *)textField {
     self.viewToDim = view;
     self.viewsToDim = nil;
