@@ -110,9 +110,6 @@ BOOL emailIsValid(NSString *candidate);
 + (NSArray *)nonRepeatingFirstLettersArrayFromStringsArray:(NSArray *)array;
 + (NSArray *)alphabeticallySortedArray:(NSArray *)array ascending:(BOOL)ascending key:(NSString *)key;
 
-//Label
-+ (UILabel *)adjustLabel:(UILabel *)label forString:(NSString *)string width:(CGFloat)width;
-
 //Views
 + (CGRect)frameForAddingViewBelowView:(UIView *)topView toView:(UIView *)superview;
 
