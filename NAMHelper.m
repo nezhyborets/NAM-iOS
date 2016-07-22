@@ -367,18 +367,6 @@ BOOL emailIsValid(NSString *candidate) {
 }
 
 #pragma mark - Views
-
-+ (UILabel *)adjustLabel:(UILabel *)label forString:(NSString *)string width:(CGFloat)width {
-    CGSize maxSize = CGSizeMake(width, 9999);
-    CGSize size = [string sizeWithFont:label.font constrainedToSize:maxSize];
-
-    CGRect newFrame = label.frame;
-    newFrame.size.height = size.height;
-    label.frame = newFrame;
-
-    return label;
-}
-
 + (CGRect)frameForAddingViewBelowView:(UIView *)topView toView:(UIView *)superview {
     CGFloat topViewLowestY = topView.frame.origin.y + topView.frame.size.height;
     return CGRectMake(0, topViewLowestY, superview.bounds.size.width, superview.bounds.size.height - topViewLowestY);
