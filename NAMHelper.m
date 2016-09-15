@@ -80,16 +80,6 @@ void errorAlert(NSString *text) {
     errorAlert(text);
 }
 
-NSString *_infoAlertTitle;
-+ (void)setInfoAlertTitle:(NSString *)infoAlertTitle {
-    _infoAlertTitle = infoAlertTitle;
-}
-
-void infoAlert(NSString *text) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:_infoAlertTitle message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
-}
-
 BOOL iOS8() {
     return SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0");
 }

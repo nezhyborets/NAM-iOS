@@ -12,19 +12,19 @@ class NetworkActivityIndicatorHelper: NSObject {
     static var number: Int = 0
     
     class func addOperation() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.number += 1
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = (self.number > 0)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = (self.number > 0)
         })
     }
     
     class func removeOperation() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.number -= 1
             if (self.number < 0) {
                 fatalError("Network Activity Indicator was asked to hide more often than shown")
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = (self.number > 0)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = (self.number > 0)
         })
     }
 }

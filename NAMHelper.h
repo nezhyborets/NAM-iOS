@@ -57,12 +57,10 @@ NSString *appErrorDomain();
 NSString *namErrorDomain();
 void errorAlert(NSString *text);
 + (void)errorAlert:(NSString *)text;
-
-+ (void)setInfoAlertTitle:(NSString *)infoAlertTitle;
 void infoAlert(NSString *text);
-
 NSError *nam_unknownError(NSString *someExplanation);
 NSDictionary *nam_userInfoWithError(NSError *error);
+
 
 BOOL smallScreen();
 BOOL iOS8();

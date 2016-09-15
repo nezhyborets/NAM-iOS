@@ -15,13 +15,13 @@ let kMissingFacebookPermissionsErrorCode = 4
 let kEmailAlreadyTakenErrorCode = 5
 
 extension NSError {
-    func equals(error: NSError) -> Bool {
+    func equals(_ error: NSError) -> Bool {
         return error.domain == self.domain && self.code == error.code
     }
 }
 
 class ErrorHelper: NSObject {
-    private static let kErrorDomain = NSBundle.mainBundle().bundleIdentifier != nil ? NSBundle.mainBundle().bundleIdentifier! : "defaultDomain"
+    fileprivate static let kErrorDomain = Bundle.main.bundleIdentifier != nil ? Bundle.main.bundleIdentifier! : "defaultDomain"
     
     class func appErrorDomain() -> String {
         return kErrorDomain
@@ -39,7 +39,7 @@ class ErrorHelper: NSObject {
         return self.notLoggedInErrorFromError(nil)
     }
     
-    class func notLoggedInErrorFromError(error: NSError?) -> NSError {
+    class func notLoggedInErrorFromError(_ error: NSError?) -> NSError {
         let userInfo = error?.userInfo ?? [NSLocalizedDescriptionKey : "not_logged_in".localized]
         return NSError(domain: kErrorDomain, code: kNotLoggedInErrorCode, userInfo: userInfo)
     }
@@ -60,30 +60,15 @@ class ErrorHelper: NSObject {
         return NSError(domain: kErrorDomain, code: kEmailAlreadyTakenErrorCode, userInfo: [NSLocalizedDescriptionKey : "email_taken".localized])
     }
     
-    class func errorWithMessage(errorMessage: String) -> NSError {
+    class func errorWithMessage(_ errorMessage: String) -> NSError {
         return NSError(domain: kErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : errorMessage])
     }
     
-    class func simpleRequestCompletionWithErrorKey(_: String, completionBlock: (error: NSError?) -> ()) -> BaseRequestCompletion {
-        return { (responseJson, requestError) -> () in
-            var errorForCompletion: NSError?
-            
-            if let uError = requestError {
-                errorForCompletion = uError
-            } else if let errorString = responseJson?["error"] as? String {
-                print("error found in json \(responseJson)")
-                errorForCompletion = NSError(domain: "Debts", code: 0, userInfo: [NSLocalizedDescriptionKey : errorString])
-            }
-            
-            completionBlock(error: errorForCompletion)
-        }
-    }
-    
-    class func errorForRequest(json: [NSObject : AnyObject]?, error: NSError?) -> NSError? {
+    class func errorForRequest(_ json: [AnyHashable: Any]?, error: NSError?) -> NSError? {
         return self.errorForRequest(json, successKey: nil, error: error)
     }
     
-    class func errorForRequest(json: [NSObject : AnyObject]?, successKey: String?, error: NSError?) -> NSError? {
+    class func errorForRequest(_ json: [AnyHashable: Any]?, successKey: String?, error: NSError?) -> NSError? {
         if let uError = error {
             return uError
         } else if let errorString = json?["error"] as? String {
@@ -103,12 +88,12 @@ class ErrorHelper: NSObject {
         return nil
     }
     
-    class func errorForRequest(json: [NSObject : AnyObject]?, statusCode: NSInteger, error: NSError?, successKey: String?) -> NSError? {
+    class func errorForRequest(_ json: [AnyHashable: Any]?, statusCode: NSInteger, error: NSError?, successKey: String?) -> NSError? {
         if statusCode == 401 {
             return ErrorHelper.notLoggedInErrorFromError(error)
         } else if let uError = error {
             if (statusCode != 0 || statusCode != NSNotFound) {
-                var userInfo: [NSObject : AnyObject] = uError.userInfo ?? [:]
+                var userInfo: [AnyHashable: Any] = uError.userInfo
                 userInfo[ErrorHelper.errorStatusCodeKey()] = statusCode
                 return NSError(domain: uError.domain, code: uError.code, userInfo: userInfo)
             } else {
@@ -131,17 +116,17 @@ class ErrorHelper: NSObject {
         return nil
     }
     
-    class func anyErrorStringFromJson(json: [NSObject : AnyObject]?) -> String? {
+    class func anyErrorStringFromJson(_ json: [AnyHashable: Any]?) -> String? {
         if let string = json?["error"] as? String {
             return string
-        } else if let array = json?["error"] as? [String] where array.count > 0 {
+        } else if let array = json?["error"] as? [String] , array.count > 0 {
             return array.first
         }
         
         return nil
     }
     
-    class func textForError(error: NSError, statusCode: NSInteger) -> String? {
+    class func textForError(_ error: NSError, statusCode: NSInteger) -> String? {
         var errorString: String?
         
         if error.domain == (kCFErrorDomainCFNetwork as String) {
@@ -161,8 +146,8 @@ class ErrorHelper: NSObject {
         return errorString
     }
     
-    class func userFriendlyErrorForNetworkError(error: NSError, statusCode: NSInteger) -> NSError {
-        var userInfo: [NSObject : AnyObject] = [:]
+    class func userFriendlyErrorForNetworkError(_ error: NSError, statusCode: NSInteger) -> NSError {
+        var userInfo: [AnyHashable: Any] = [:]
         if let _ = error.userInfo[NSLocalizedDescriptionKey] { //it is not right to check only for NSLocalizedDescriptionKey here
             userInfo = error.userInfo
         } else {
@@ -181,7 +166,7 @@ class ErrorHelper: NSObject {
         return NSError(domain: error.domain, code: error.code, userInfo: userInfoM)
     }
     
-    class func userFriendlyErrorForNetworkError(error: NSError) -> NSError {
+    class func userFriendlyErrorForNetworkError(_ error: NSError) -> NSError {
         return self.userFriendlyErrorForNetworkError(error, statusCode: NSNotFound)
     }
 }
