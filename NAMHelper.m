@@ -55,25 +55,38 @@ NSString *nam_addS(NSString *string, NSInteger count) {
 NSMutableArray *_displayedErrors;
 
 void errorAlert(NSString *text) {
+    errorAlertInController(text, nil);
+}
+
+void errorAlertInController(NSString *text, UIViewController *controller) {
     if (!_displayedErrors) {
         _displayedErrors = [[NSMutableArray alloc] init];
     }
-
+    
     if (text == nil) {
         text = @"Unknown error. errorAlert() function called without parameter";
     }
-
+    
     if ([_displayedErrors containsObject:text]) {
         return;
     }
-
+    
     [_displayedErrors addObject:text];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_displayedErrors removeObject:text];
     });
-
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
+    
+    NSString *errorTitle = NSLocalizedString(@"Error", nil);
+    
+    if (controller && [UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:errorTitle message:text preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:action];
+        [controller presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errorTitle message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
 }
 
 + (void)errorAlert:(NSString *)text {

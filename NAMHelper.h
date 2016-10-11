@@ -56,6 +56,7 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
 NSString *appErrorDomain();
 NSString *namErrorDomain();
 void errorAlert(NSString *text);
+void errorAlertInController(NSString *text, UIViewController *controller);
 + (void)errorAlert:(NSString *)text;
 void infoAlert(NSString *text);
 NSError *nam_unknownError(NSString *someExplanation);
