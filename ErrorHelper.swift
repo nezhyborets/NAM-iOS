@@ -73,10 +73,10 @@ class ErrorHelper: NSObject {
             return uError
         } else if let errorString = json?["error"] as? String {
             if errorString == "not_logged_in".localized || errorString == "not_logged_in".localized  {
-                print(json)
+                print(json ?? "json == nil")
                 return ErrorHelper.notLoggedInErrorFromError(error)
             } else {
-                print(json)
+                print(json ?? "json == nil")
                 return ErrorHelper.errorWithMessage(errorString)
             }
         } else if let key = successKey {
@@ -101,10 +101,10 @@ class ErrorHelper: NSObject {
             }
         } else if let errorString = json?["error"] as? String {
             if errorString == "not_logged_in".localized {
-                print(json)
+                print(json ?? "json == nil")
                 return ErrorHelper.notLoggedInErrorFromError(error)
             } else {
-                print(json)
+                print(json ?? "json == nil")
                 return ErrorHelper.errorWithMessage(errorString)
             }
         } else if let key = successKey {
