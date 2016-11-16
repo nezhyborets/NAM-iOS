@@ -58,6 +58,11 @@ void errorAlert(NSString *text) {
     errorAlertInController(text, nil);
 }
 
+void errorAlertOverKeyboard(NSString *text) {
+    UIViewController *controller = [UIApplication sharedApplication].windows.lastObject.rootViewController;
+    errorAlertInController(text, controller);
+}
+
 void errorAlertInController(NSString *text, UIViewController *controller) {
     if (!_displayedErrors) {
         _displayedErrors = [[NSMutableArray alloc] init];
