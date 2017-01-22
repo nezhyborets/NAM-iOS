@@ -65,6 +65,7 @@ NSDictionary *nam_userInfoWithError(NSError *error);
 
 
 BOOL smallScreen();
+BOOL mediumScreen();
 BOOL iOS8();
 
 //UIView

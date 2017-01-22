@@ -106,6 +106,11 @@ BOOL smallScreen() {
     return [UIScreen mainScreen].bounds.size.height < 500;
 }
 
+BOOL mediumScreen() {
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    return height > 500 && height < 570;
+}
+
 NSString *documentsPath(void) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = nil;
