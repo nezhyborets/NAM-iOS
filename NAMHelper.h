@@ -53,8 +53,8 @@ typedef NS_ENUM(NSUInteger, ShapeType) {
 #define DLog( s, ... )
 #endif
 
-NSString *appErrorDomain();
-NSString *namErrorDomain();
+NSString *appErrorDomain(void);
+NSString *namErrorDomain(void);
 void errorAlert(NSString *text);
 void errorAlertOverKeyboard(NSString *text);
 void errorAlertInController(NSString *text, UIViewController *controller);
@@ -64,9 +64,9 @@ NSError *nam_unknownError(NSString *someExplanation);
 NSDictionary *nam_userInfoWithError(NSError *error);
 
 
-BOOL smallScreen();
-BOOL mediumScreen();
-BOOL iOS8();
+BOOL smallScreen(void);
+BOOL mediumScreen(void);
+BOOL iOS8(void);
 
 //UIView
 void nam_setViewEnabled(UIView *view, BOOL enabled);
