@@ -82,16 +82,12 @@ void errorAlertInController(NSString *text, UIViewController *controller) {
     });
     
     NSString *errorTitle = NSLocalizedString(@"Error", nil);
-    
-    if (controller && [UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:errorTitle message:text preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-        [alertController addAction:action];
-        [controller presentViewController:alertController animated:YES completion:nil];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errorTitle message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
-    }
+
+    assert(controller && [UIAlertController class]);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:errorTitle message:text preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:action];
+    [controller presentViewController:alertController animated:YES completion:nil];
 }
 
 + (void)errorAlert:(NSString *)text {
