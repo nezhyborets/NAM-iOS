@@ -36,11 +36,11 @@ void nam_setViewEnabled(UIView *view, BOOL enabled) {
     view.userInteractionEnabled = enabled;
 };
 
-NSString *appErrorDomain() {
+NSString *appErrorDomain(void) {
     return [[NSBundle mainBundle] bundleIdentifier] ?: @"defaultDomain";
 }
 
-NSString *namErrorDomain() {
+NSString *namErrorDomain(void) {
     return @"NAMCustomErrorDomain";
 }
 
@@ -94,15 +94,15 @@ void errorAlertInController(NSString *text, UIViewController *controller) {
     errorAlert(text);
 }
 
-BOOL iOS8() {
+BOOL iOS8(void) {
     return SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0");
 }
 
-BOOL smallScreen() {
+BOOL smallScreen(void) {
     return [UIScreen mainScreen].bounds.size.height < 500;
 }
 
-BOOL mediumScreen() {
+BOOL mediumScreen(void) {
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     return height > 500 && height < 570;
 }
